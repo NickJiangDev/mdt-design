@@ -1,0 +1,23 @@
+@import './mixin';
+@prefixCls: dmc-load-progress;
+
+.@{prefixCls} {
+  pointer-events: none;
+
+  &-line-bar {
+    .position-tl(fixed);
+    .size(100%, 2px);
+    z-index: @zindex-max;
+    background: var(--dmc-load-process-color);
+
+    &-container {
+      position: absolute;
+      right: 0;
+      display: block;
+      .size(100px, 100%);
+      // box-shadow: 0 0 10px var(--dmc-blue-300-color), 0 0 5px var(--dmc-blue-300-color);
+      transform: rotate(4deg) translate(0, -3px);
+      opacity: 1;
+    }
+  }
+}

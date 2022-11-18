@@ -1,0 +1,417 @@
+@import './mixin.less';
+
+@picker-cell-inner-cls: dmc-date-picker-cell-inner;
+@prefixCls: dmc-date-picker;
+
+.@{prefixCls} {
+  @picker-arrow-size: 7px;
+  @picker-year-month-cell-width: 60px;
+  @picker-panel-cell-height: 28px;
+  @picker-time-panel-cell-height: 34px;
+  &-panel {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    background: var(--dmc-date-picker-panel-bg-color);
+    border: 1px solid var(--dmc-border-page-color);
+    border-radius: 4px;
+    outline: none;
+  }
+
+  &-decade-panel,
+  &-year-panel,
+  &-quarter-panel,
+  &-month-panel,
+  &-week-panel,
+  &-date-panel,
+  &-time-panel {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 256px;
+    padding: 20px;
+  }
+
+  // ======================= Header =======================
+  &-header {
+    display: flex;
+
+    > * {
+      flex: none;
+    }
+
+    button {
+      padding: 0;
+      color: var(--dmc-date-picker-header-color);
+      line-height: 32px;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+
+    > button {
+      min-width: 1.6em;
+
+      &:hover {
+        background: var(--dmc-date-picker-header-bg-hover-color);
+      }
+    }
+
+    &-view {
+      flex: auto;
+      color: var(--dmc-date-picker-header-color);
+      font-weight: 500;
+      line-height: 32px;
+
+      button {
+        color: var(--dmc-date-picker-header-color);
+        font-weight: inherit;
+        text-align: center;
+
+        &:hover {
+          background: var(--dmc-date-picker-header-bg-hover-color);
+        }
+      }
+    }
+  }
+
+  &-prev-icon,
+  &-next-icon,
+  &-super-next-icon,
+  &-super-prev-icon {
+    .square(18px);
+    color: var(--dmc-date-picker-suffix-color);
+  }
+
+  // ======================== Body ========================
+  &-content {
+    width: 100%;
+    font-size: 14px;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    th,
+    td {
+      position: relative;
+      min-width: 24px;
+      font-weight: 500;
+    }
+
+    th {
+      height: 30px;
+      color: var(--dmc-date-picker-content-color);
+      line-height: 30px;
+    }
+  }
+
+  .picker-cell-inner(@cellClassName) {
+    &::before {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      left: 0;
+      z-index: 1;
+      height: @picker-panel-cell-height;
+      transform: translateY(-50%);
+      content: '';
+    }
+
+    // >>> Default
+    .@{cellClassName} {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      min-width: @picker-panel-cell-height;
+      height: @picker-panel-cell-height;
+      line-height: @picker-panel-cell-height;
+    }
+
+    // >>> Hover
+    &:hover:not(&-in-view),
+    &:hover:not(&-selected):not(&-range-start):not(&-range-end):not(&-range-hover-start):not(&-range-hover-end) {
+      .@{cellClassName} {
+        background: var(--dmc-date-picker-content-bg-hover-color);
+      }
+    }
+
+    // >>> Today
+    &-in-view&-today .@{cellClassName} {
+      color: var(--dmc-date-picker-today-color);
+      font-size: 14px;
+    }
+
+    // >>> Selected
+    &-in-view&-selected .@{cellClassName},
+    &-in-view&-range-start .@{cellClassName},
+    &-in-view&-range-end .@{cellClassName} {
+      color: var(--dmc-date-picker-content-selected-color);
+      background: var(--dmc-date-picker-content-selected-bg-color);
+    }
+
+    // >>> Disabled
+    &-disabled {
+      pointer-events: none;
+
+      .@{cellClassName} {
+        background: transparent;
+      }
+    }
+  }
+
+  &-cell {
+    color: var(--dmc-date-picker-content-out-cell-color);
+
+    // In view
+    &-in-view {
+      color: var(--dmc-date-picker-content-inner-cell-color);
+      cursor: pointer;
+    }
+
+    // Disabled
+    &-disabled {
+      cursor: not-allowed;
+      color: var(--dmc-date-picker-disabled-text-color);
+    }
+
+    .picker-cell-inner(~'@{picker-cell-inner-cls}');
+  }
+
+  // ======================== Footer ========================
+  &-footer {
+    width: min-content;
+    min-width: 100%;
+    line-height: 42px;
+    text-align: center;
+
+    &-extra {
+      width: 256px;
+      text-align: left;
+    }
+
+    &-radio-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      line-height: 38px;
+      border-top: 2px solid var(--dmc-border-page-color);
+      border-bottom: 2px solid var(--dmc-border-page-color);
+    }
+
+    &-range-radio-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      line-height: 38px;
+    }
+  }
+  &-now {
+    color: var(--dmc-date-picker-today-btn-color);
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  &-today-btn {
+    color: var(--dmc-date-picker-today-btn-color);
+    font-size: 14px;
+    cursor: pointer;
+
+    &&-disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  // ========================================================
+  // =                       Special                        =
+  // ========================================================
+
+  // ===================== month year quarter Panel =====================
+  &-month-panel {
+    .@{picker-cell-inner-cls} {
+      .cell-size(72px, 55px);
+      font-size: 14px;
+    }
+  }
+
+  &-year-panel {
+    .@{picker-cell-inner-cls} {
+      .cell-size(66px, 43px);
+      font-size: 14px;
+    }
+  }
+
+  &-quarter-panel {
+    .@{picker-cell-inner-cls} {
+      .cell-size(55px, 55px);
+    }
+    .@{prefixCls}-content {
+      height: 56px;
+    }
+  }
+
+  &-month-btn,
+  &-year-btn {
+    width: 62px;
+  }
+
+  // ===================== Decade Panel =====================
+
+  &-decade-panel {
+    .@{picker-cell-inner-cls} {
+      .cell-size(66px, 43px);
+      font-size: 12px;
+    }
+    .@{prefixCls}-cell::before {
+      display: none;
+    }
+  }
+
+  // ====================== Week Panel ======================
+  &-week-panel {
+    // Clear cell style
+    .@{prefixCls}-cell {
+      &:hover .@{picker-cell-inner-cls},
+      &-selected .@{picker-cell-inner-cls},
+      .@{picker-cell-inner-cls} {
+        background: transparent !important;
+      }
+    }
+
+    &-row {
+      &:hover td {
+        background: var(--dmc-date-picker-content-bg-hover-color);
+      }
+
+      &-selected td,
+      &-selected:hover td {
+        background: var(--dmc-date-picker-content-selected-bg-color);
+      }
+    }
+  }
+
+  // ==================== Datetime Panel ====================
+  &-show-time {
+    .@{prefixCls}-footer-radio-group {
+      border-bottom: none;
+    }
+  }
+
+  &-datetime-panel {
+    display: flex;
+
+    .@{prefixCls}-time-panel {
+      z-index: 1;
+      margin-bottom: -44px;
+      background: var(--dmc-date-picker-panel-bg-color);
+
+      .@{prefixCls}-header {
+        border-bottom: 1px solid var(--dmc-border-page-color);
+        border-left: 1px solid var(--dmc-border-page-color);
+      }
+
+      .@{prefixCls}-content {
+        //margin-bottom: -46px;
+        border-left: 1px solid var(--dmc-border-page-color);
+      }
+    }
+
+    // Keyboard
+    &-active {
+      .@{prefixCls}-date-panel,
+      .@{prefixCls}-time-panel {
+        opacity: 0.3;
+
+        &-active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // ====================== Time Panel ======================
+  &-time-panel {
+    width: auto;
+    min-width: auto;
+    padding: 0;
+
+    .@{prefixCls}-content {
+      display: flex;
+      flex: auto;
+      height: 224px;
+    }
+
+    &-column {
+      flex: 1 0 auto;
+      width: 72px;
+      margin: 0;
+      padding: 0 0 194px 0;
+      overflow-y: hidden;
+      text-align: left;
+      list-style: none;
+
+      &:not(:first-child) {
+        border-left: 1px solid var(--dmc-border-page-color);
+      }
+
+      &:hover {
+        overflow-y: auto;
+        .scrollbar(transparent, transparent, 0, 0, 0);
+      }
+
+      > li {
+        margin: 0;
+        padding: 0;
+
+        &.@{prefixCls}-time-panel-cell {
+          .@{prefixCls}-time-panel-cell-inner {
+            display: block;
+            width: 100%;
+            height: @picker-time-panel-cell-height;
+            margin: 0;
+            padding: 0;
+            color: var(--dmc-date-picker-content-inner-cell-color);
+            line-height: @picker-time-panel-cell-height;
+            text-align: center;
+            border-radius: 0;
+            cursor: pointer;
+
+            &:hover {
+              background: var(--dmc-date-picker-content-bg-hover-color);
+            }
+          }
+
+          &-selected {
+            .@{prefixCls}-time-panel-cell-inner {
+              color: var(--dmc-date-picker-content-selected-color);
+              background: var(--dmc-date-picker-content-selected-bg-color);
+            }
+          }
+
+          &-disabled {
+            .@{prefixCls}-time-panel-cell-inner {
+              color: var(--dmc-date-picker-header-bg-hover-color);
+              background: transparent;
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Fix IE11 render bug by css hacks
+// https://github.com/ant-design/ant-design/issues/21559
+// https://codepen.io/afc163-1472555193/pen/mdJRaNj?editors=0110
+/* stylelint-disable-next-line */
+_:-ms-fullscreen,
+:root {
+  .@{prefixCls}-range-wrapper {
+    .@{prefixCls}-month-panel .@{prefixCls}-cell,
+    .@{prefixCls}-year-panel .@{prefixCls}-cell {
+      padding: 21px 0;
+    }
+  }
+}

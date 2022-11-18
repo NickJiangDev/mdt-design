@@ -1,0 +1,105 @@
+@import './mixin';
+
+@prefixCls: dmc-dropmenu;
+
+.@{prefixCls} {
+  .flex-ai-jc(center, space-between, inline-flex);
+  box-sizing: border-box;
+  padding: 6px 10px;
+  color: var(--dmc-select-text-color);
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  background: var(--dmc-select-bg-color);
+  border: 1px solid var(--dmc-border-btn-color);
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover:not(:active):not(&-actived):not(&-disabled) {
+    background: var(--dmc-select-bg-hover-color);
+  }
+
+  &-compact {
+    &.@{prefixCls} {
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  &-menu-bg {
+    background: var(--dmc-select-bg-mb-color);
+    &:hover:not(:active):not(.@{prefixCls}-actived):not(.@{prefixCls}-disabled) {
+      background: var(--dmc-select-bg-mb-hover-color);
+    }
+  }
+
+  &-assist-bg {
+    background: var(--dmc-select-bg-ab-color);
+    &:hover:not(:active):not(.@{prefixCls}-actived):not(.@{prefixCls}-disabled) {
+      background: var(--dmc-select-bg-ab-hover-color);
+    }
+  }
+
+  &-no-border {
+    border: 1px solid transparent;
+  }
+
+  &:active:not(&-disabled),
+  &-actived:not(&-disabled) {
+    background: var(--dmc-select-bg-active-color);
+    border-color: var(--dmc-select-border-active-color);
+    box-shadow: inset 0 0 1px 1px var(--dmc-select-border-active-color);
+  }
+
+  &-icon {
+    .square(16px);
+    margin-right: 6px;
+  }
+
+  &&-only-text {
+    padding: 0;
+    color: var(--dmc-drop-menu-only-text-color);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    &:hover:not(:active):not(.@{prefixCls}-actived):not(.@{prefixCls}-disabled) {
+      color: var(--dmc-drop-menu-only-text-hover-color);
+    }
+
+    &.@{prefixCls}-actived {
+      color: var(--dmc-drop-menu-only-text-active-color);
+    }
+  }
+
+  &-sub-menu-item span {
+    padding-left: 9px;
+  }
+
+  &-menu-item {
+    display: flex;
+    align-items: center;
+    margin-left: -13px;
+  }
+
+  &-menu-item-actived &-drop-icon {
+    opacity: 1;
+  }
+
+  &-drop-icon {
+    .square(16px);
+    margin-right: 6px;
+    opacity: 0;
+  }
+
+  &-block {
+    display: flex;
+    width: 100%;
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    color: var(--dmc-select-text-txt-disabled-color);
+  }
+}

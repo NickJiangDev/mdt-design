@@ -1,0 +1,73 @@
+@import './mixin';
+
+@prefixCls: dmc-sort-list;
+
+.@{prefixCls} {
+  position: relative;
+  box-sizing: border-box;
+  .square(100%);
+
+  &-assist-bg {
+    background: var(--dmc-sortlist-ab-bg-color);
+  }
+
+  &-plain {
+    .@{prefixCls}-item {
+      padding-top: 2px;
+      padding-bottom: 2px;
+      &:hover {
+        background: unset !important;
+      }
+    }
+    &-row-wrap {
+      flex: 1;
+    }
+  }
+
+  &-item {
+    .flex-ai(center);
+    box-sizing: border-box;
+    padding: 6px 8px;
+    color: var(--dmc-sortlist-item-color);
+    border-radius: 4px;
+    user-select: none;
+
+    &-action {
+      display: inline-flex;
+      visibility: hidden;
+      cursor: pointer;
+      .square(12px);
+
+      &:hover:not(:active) {
+        color: var(--dmc-sortlist-text-hover-color);
+      }
+
+      & + & {
+        margin-left: 10px;
+      }
+    }
+
+    &:hover:not(&-draging) {
+      background: var(--dmc-sortlist-hover-color);
+
+      .@{prefixCls}-item-action {
+        visibility: visible;
+      }
+    }
+
+    &-handle {
+      display: inline-flex;
+      margin-right: 6px;
+      .square(14px);
+    }
+
+    &-label {
+      flex: 1;
+      color: var(--dmc-sortlist-text-color);
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 18px;
+      .text-ellipsis();
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import './mixin';
+
+@prefixCls: dmc-adaptive-more;
+
+.@{prefixCls} {
+  .square(100%);
+  position: relative;
+  .flex-ai(center);
+
+  &-inner {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &-item {
+    font-size: 13px;
+    line-height: 18px;
+    cursor: pointer;
+  }
+
+  &-hidden {
+    position: absolute;
+    z-index: @zindex-background;
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    width: 100%;
+    visibility: hidden;
+    .@{prefixCls}-item {
+      flex: none;
+      box-sizing: border-box;
+    }
+  }
+}

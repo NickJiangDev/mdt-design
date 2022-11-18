@@ -1,0 +1,106 @@
+@import './mixin.less';
+
+@prefixCls: dmc-transfer;
+
+.@{prefixCls} {
+  .flex-ai(center);
+  width: 100%;
+  &-no-padding {
+    .dmc-check-list-search {
+      padding-top: 0;
+      padding-left: 0;
+    }
+    .dmc-check-list-list {
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+  }
+  & > div {
+    flex: 1 0 auto;
+    width: 50%;
+  }
+  &-assist-bg {
+    background: var(--dmc-transfer-ab-bg-color) !important;
+  }
+  &-plain {
+    .dmc-check-list-list,
+    .dmc-input {
+      border: none;
+    }
+    .dmc-check-list-wrap {
+      box-sizing: border-box;
+      margin-right: 10px;
+      border: 1px solid var(--dmc-border-btn-color);
+      border-radius: 6px;
+    }
+    .dmc-transfer-checked {
+      padding: 11px 10px 10px 10px;
+    }
+    .@{prefixCls}-checked {
+      border: 1px solid var(--dmc-border-btn-color);
+      border-radius: 6px;
+      &-list {
+        border: none;
+      }
+    }
+  }
+  &-sort-list-desc {
+    margin-right: 4px;
+    overflow: hidden;
+    color: var(--dmc-transfer-desc-color);
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  &-checked {
+    .flex-dir(column);
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0;
+    &-top-right {
+      display: flex;
+      align-items: center;
+      height: 32px;
+      margin-bottom: 6px;
+      padding-right: 8px;
+      &-other {
+        display: flex;
+        flex: 1;
+        align-items: center;
+      }
+      .clear {
+        color: var(--dmc-transfer-sortlist-clear-color);
+        font-size: 12px;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .align-right {
+        justify-content: flex-end;
+      }
+      .space-between {
+        justify-content: space-between;
+      }
+    }
+    &-count {
+      color: var(--dmc-transfer-desc-color);
+      font-size: 13px;
+    }
+    &-list {
+      flex: 1;
+      overflow: auto;
+      background: var(--dmc-transfer-bg-color);
+      border: 1px solid var(--dmc-border-btn-color);
+      border-radius: 4px;
+      &-wrapper {
+        padding: 8px 10px;
+      }
+      &-plain {
+        height: 100%;
+        padding: 0;
+      }
+    }
+  }
+  &-plain-sort {
+    //border: 1px solid var(--dmc-split-color);
+  }
+}

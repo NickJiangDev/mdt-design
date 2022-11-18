@@ -1,0 +1,79 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Overview/Intro" />
+
+# MDT DESIGN
+
+一套react组件库，使我们开发效率更高效
+
+## Features
+
+  * 深浅色系切换，点击上方太阳|月亮图标
+  * 支持中英文
+  * 支持 cjs、esm、umd、iife 多种使用方式
+
+## Install
+
+  `npm install @datlas/design`
+
+  or
+
+  `yarn add @datlas/design`
+
+## Usage
+
+  ``` js
+  import { loadTheme } from '@datlas/design/esm/components/style/themes';
+  import { ThemeEnum } from '@datlas/design/esm/components/style/context';
+  import Button from '@datlas/design/esm/components/button';
+
+  loadTheme(ThemeEnum.dark);
+
+  export default () => {
+    <Button type="primary">button</Button>
+  }
+
+  ```
+
+  可以添加 webpack alias 使引用路径变短
+  ```js
+  addWebpackAlias({ ["@@"]: path.resolve('./node_modules/@datlas/design/esm') })
+
+  ```
+  tsconfig:
+  ```json
+  {
+    "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/*": ["./node_modules/@datlas/design/esm/*"]
+    }
+  }
+  ```
+
+  使用时
+  ```js
+  import Button from '@@/components/button';
+  ```
+
+
+## 可能遇到的问题
+
+1. d.ts 报错，请添加 ignore-loader
+
+    ```js
+    config.module.rules.push({
+      test: /\.d\.ts$/,
+      loader: 'ignore-loader'
+    });
+
+    ```
+
+2. react 多实例问题 [https://github.com/facebook/react/issues/13991](https://github.com/facebook/react/issues/13991)
+
+    ```js
+
+    addWebpackAlias({ react: path.resolve('./node_modules/react')})
+
+    ```

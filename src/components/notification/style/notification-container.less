@@ -1,0 +1,61 @@
+@import './mixin';
+
+@prefixCls: dmc-notification-container;
+
+.@{prefixCls} {
+  position: relative;
+  box-sizing: border-box;
+  width: 384px;
+  padding: 18px 24px 18px 64px;
+  font-weight: normal;
+  background: var(--dmc-notification-bg-color);
+  border: 1px solid var(--dmc-border-page-color);
+  border-radius: 4px;
+  box-shadow: var(--dmc-notification-shadow);
+
+  &-no-icon {
+    padding-left: 24px;
+  }
+
+  &-footer {
+    .flex-ai-jc(center, flex-end);
+    margin-top: 16px;
+
+    .dmc-btn + .dmc-btn {
+      margin-left: 8px;
+    }
+  }
+
+  &-desc {
+    margin-top: 8px;
+    color: var(--dmc-notification-desc-color);
+    font-size: 13px;
+    line-height: 150%;
+    .text-ellipsis(5);
+  }
+
+  &-message {
+    color: var(--dmc-notification-title-color);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &-icon {
+    .position-tl(absolute, 18px, 24px);
+    .square(24px);
+    color: var(--dmc-notification-icon-color);
+  }
+
+  &-success {
+    color: var(--dmc-notification-icon-success-color);
+  }
+
+  &-alert {
+    color: var(--dmc-notification-icon-alert-color);
+  }
+
+  &-help-2 {
+    color: var(--dmc-notification-icon-help-color);
+  }
+}

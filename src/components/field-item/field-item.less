@@ -1,0 +1,103 @@
+@import '../style/mixins/index';
+@prefixCls: dmc-field-item;
+.@{prefixCls} {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 26px;
+  padding: 0 8px;
+  overflow: hidden;
+  color: var(--dmc-field-text-color);
+  font-size: 13px;
+  background-color: var(--dmc-field-bg-color);
+  border-left: 4px solid;
+  border-radius: 4px 2px 2px 4px;
+  &-icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+    background-color: var(--dmc-field-text-color);
+  }
+  .dmc-icon {
+    flex-shrink: 0;
+  }
+  &-name {
+    //.text-ellipsis(1);
+    width: inherit;
+    //padding: 6px 0;
+    line-height: 20px;
+    word-break: break-all;
+  }
+  &-type-icon {
+    margin-right: 4px;
+  }
+  &-text {
+    color: var(--dmc-field-blue-text-color);
+    background-color: var(--dmc-field-blue-bg-color);
+    border-color: var(--dmc-field-blue-color);
+    .@{prefixCls}-icon {
+      background-color: var(--dmc-field-blue-text-color);
+    }
+    .@{prefixCls}-close {
+      color: var(--dmc-field-blue-text-color);
+    }
+    &:hover {
+      background-color: var(--dmc-field-bg-blue-hover-color);
+    }
+  }
+  &-number,
+  &-num {
+    color: var(--dmc-field-red-text-color);
+    background-color: var(--dmc-field-red-bg-color);
+    border-color: var(--dmc-field-red-color);
+    .@{prefixCls}-icon {
+      background-color: var(--dmc-field-red-text-color);
+    }
+    .@{prefixCls}-close {
+      color: var(--dmc-field-red-text-color);
+    }
+    &:hover {
+      background-color: var(--dmc-field-bg-red-hover-color);
+    }
+  }
+  &-datetime {
+    color: var(--dmc-field-green-text-color);
+    background-color: var(--dmc-field-green-bg-color);
+    border-color: var(--dmc-field-green-color);
+    .@{prefixCls}-icon {
+      background-color: var(--dmc-field-green-text-color);
+    }
+    .@{prefixCls}-close {
+      color: var(--dmc-field-green-text-color);
+    }
+    &:hover {
+      background-color: var(--dmc-field-bg-green-hover-color);
+    }
+  }
+
+  &-checked&-text {
+    color: var(--dmc-field-blue-text-color);
+    background-color: var(--dmc-field-checked-blue-bg-color);
+    border-color: var(--dmc-field-checked-blue-color);
+    .@{prefixCls}-icon {
+      background: var(--dmc-field-blue-icon-color);
+    }
+  }
+  &-checked&-number {
+    color: var(--dmc-field-red-text-color);
+    background-color: var(--dmc-field-checked-red-bg-color);
+    border-color: var(--dmc-field-checked-red-color);
+    .@{prefixCls}-icon {
+      background: var(--dmc-field-red-icon-color);
+    }
+  }
+  &-checked&-datetime {
+    color: var(--dmc-field-green-text-color);
+    background-color: var(--dmc-field-checked-green-bg-color);
+    border-color: var(--dmc-field-checked-green-color);
+    .@{prefixCls}-icon {
+      background-color: var(--dmc-field-green-icon-color);
+    }
+  }
+}

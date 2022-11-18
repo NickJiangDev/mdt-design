@@ -1,0 +1,20 @@
+@import './mixin';
+@prefixCls: dmc-draggable-wrap;
+
+.@{prefixCls} {
+  position: relative;
+  z-index: @zindex-draggable;
+  display: inline-block;
+  background: var(--dmc-draggable-wrap-bg-color);
+  // border: 1px solid var(--dmc-border-page-color);
+  border-radius: 6px;
+  box-shadow: var(--dmc-draggable-wrap-shadow-color);
+  pointer-events: initial;
+
+  &-handle {
+    position: absolute;
+    z-index: 1;
+    color: var(--dmc-draggable-handle-color);
+    cursor: move;
+  }
+}

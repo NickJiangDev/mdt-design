@@ -1,0 +1,63 @@
+@import '../../style/mixins/index.less';
+@prefix: dmc-pagination;
+
+//pagination
+@dmc-pagination-font-size: 13px;
+@dmc-pagination-line-height: 18px;
+@dmc-pagination-color: var(--dmc-pagination-color);
+@dmc-pagination-hover-color: var(--dmc-pagination-hover-color);
+@dmc-pagination-border-radius: 6px;
+@dmc-pagination-compact-padding-horizontal: 6px;
+@dmc-pagination-compact-padding-vertical: 3px;
+@dmc-pagination-padding-horizontal: 12px;
+@dmc-pagination-padding-vertical: 6px;
+
+//size
+@dmc-pagination-ward-size: 30px;
+@dmc-pagination-compact-ward-size: 24px;
+
+//bg
+@dmc-pagination-bg-color: var(--dmc-pagination-bg-color);
+@dmc-pagination-hover-bg-color: var(--dmc-pagination-hover-bg-color);
+@dmc-pagination-active-bg-color: var(--dmc-pagination-active-bg-color);
+@dmc-pagination-assist-bg-color: var(--dmc-pagination-assist-bg-color);
+@dmc-pagination-assist-hover-bg-color: var(--dmc-pagination-assist-hover-bg-color);
+@dmc-pagination-assist-active-bg-color: var(--dmc-pagination-assist-active-bg-color);
+
+.bg-type(@type) {
+  @bg: ~'dmc-pagination@{type}-bg-color';
+  @bg-hover: ~'dmc-pagination@{type}-hover-bg-color';
+  @bg-active: ~'dmc-pagination@{type}-active-bg-color';
+
+  li {
+    background: @@bg;
+    &.@{prefix}-item-active {
+      color: @dmc-pagination-hover-color;
+      background: @@bg-active;
+    }
+    &:hover {
+      color: @dmc-pagination-hover-color;
+      background: @@bg-hover;
+    }
+  }
+}
+
+.size-type(@type) {
+  @ward-size: ~'dmc-pagination@{type}-ward-size';
+  @padding-vertical: ~'dmc-pagination@{type}-padding-vertical';
+  @padding-horizontal: ~'dmc-pagination@{type}-padding-horizontal';
+
+  .@{prefix}-prev,
+  .@{prefix}-next {
+    .square(@@ward-size);
+  }
+
+  .@{prefix}-break,
+  .@{prefix}-item {
+    outline: none;
+    a {
+      padding: @@padding-vertical @@padding-horizontal;
+      outline: none;
+    }
+  }
+}

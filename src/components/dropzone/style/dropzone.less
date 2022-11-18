@@ -1,0 +1,102 @@
+@import './mixin';
+
+@prefixCls: dmc-dropzone;
+
+.@{prefixCls} {
+  .flex-ai-jc(center, center);
+  .square(300px);
+  border: 2px dashed;
+  border-color: var(--dmc-drop-zone-border-color);
+  background: var(--dmc-drop-zone-bg-color);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover:not([disabled]) {
+    background: var(--dmc-drop-zone-bg-active-color);
+    border-color: var(--dmc-drop-zone-border-active-color);
+  }
+
+  &-compact {
+    .square(200px);
+    border-width: 1px;
+    .@{prefixCls}-tip {
+      font-size: 13px;
+      line-height: 18px;
+    }
+
+    .@{prefixCls}-desc {
+      margin-top: 8px;
+    }
+
+    .@{prefixCls}-icon {
+      .square(54px);
+      color: var(--dmc-drop-zone-compact-icon-color);
+      border: 1px dashed;
+      border-radius: 50%;
+
+      &::before {
+        .flex-ai-jc(center, center);
+        .position-tl(absolute, -2px);
+        .square(100%);
+        font-size: 26px;
+        background: transparent;
+        content: '+';
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    border-color: var(--dmc-drop-zone-border-color) !important;
+    background: var(--dmc-drop-zone-bg-color) !important;
+  }
+
+  &-container {
+    .flex-ai-jc(center, center);
+    flex-direction: column;
+    .square(100%);
+    outline: none;
+  }
+
+  &-tip {
+    margin-top: 30px;
+    color: var(--dmc-drop-zone-tip-color);
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &-desc {
+    margin-top: 2px;
+    padding: 0 20px;
+    color: var(--dmc-drop-zone-desc-color);
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 17px;
+    text-align: center;
+  }
+
+  &-icon {
+    position: relative;
+    .square(80px);
+    color: var(--dmc-drop-zone-icon-color);
+
+    &::before {
+      .position-tl(absolute, 39px, 0);
+      .size(100%, 2px);
+      background: var(--dmc-drop-zone-icon-color);
+      content: '';
+    }
+
+    &::after {
+      .position-tl(absolute, 0, 39px);
+      .size(2px, 100%);
+      background: var(--dmc-drop-zone-icon-color);
+      content: '';
+    }
+  }
+}

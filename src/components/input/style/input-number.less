@@ -1,0 +1,183 @@
+@import './mixin';
+@prefixCls: dmc-input-number;
+
+.@{prefixCls} {
+  flex-direction: row-reverse;
+  .input();
+
+  &-input-wrap {
+    display: inline-flex;
+    flex: 1;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  &-input {
+    .square(100%);
+    padding: 0 8px;
+    color: var(--dmc-input-text-color);
+    font-size: 14px;
+    line-height: 20px;
+    background: transparent;
+    border: none;
+    outline: none !important;
+    .placeholder(var(--dmc-input-text-placeholder-color));
+  }
+
+  &-handler-wrap {
+    .flex-ai-jc(center, center);
+    flex-direction: column;
+    box-sizing: border-box;
+    .size(20px, calc(100% + 2px));
+    margin-right: -1px;
+    color: var(--dmc-input-number-extra-color);
+    background: var(--dmc-input-number-extra-bg-color);
+    border-left: 1px solid var(--dmc-border-btn-color);
+  }
+
+  &-handler-up {
+    padding-top: 1px;
+    border-bottom: 1px solid var(--dmc-border-btn-color);
+  }
+
+  &-handler {
+    .size(100%, 50%);
+    cursor: pointer;
+
+    &-active {
+      color: var(--dmc-text-200-color);
+    }
+  }
+
+  &-handler-up-inner,
+  &-handler-down-inner {
+    .square(100%);
+    user-select: none;
+  }
+
+  &:hover:not(.@{prefixCls}-disabled):not(.@{prefixCls}-focused) {
+    background: var(--dmc-input-bg-hover-color);
+  }
+
+  &-assist-bg {
+    color: var(--dmc-input-text-ab-color);
+    background: var(--dmc-input-bg-ab-color);
+
+    .@{prefixCls}-input {
+      .placeholder(var(--dmc-input-text-placeholder-ab-color));
+      // .input-box-shadow(var(--dmc-assist-panel-200-color));
+    }
+
+    .@{prefixCls}-handler-wrap {
+      color: var(--dmc-input-number-extra-ab-color);
+      background: var(--dmc-input-number-extra-bg-ab-color);
+    }
+
+    &:hover:not(.@{prefixCls}-disabled):not(.@{prefixCls}-focused) {
+      background: var(--dmc-input-bg-ab-hover-color);
+
+      // .@{prefixCls}-input {
+      // .input-box-shadow(var(--dmc-assist-panel-50-color));
+      // }
+    }
+
+    &.@{prefixCls}-disabled {
+      background: var(--dmc-input-bg-ab-disabled-color);
+      // .@{prefixCls}-input {
+      // .input-box-shadow(var(--dmc-assist-panel-400-color));
+      // }
+    }
+  }
+
+  &-compact {
+    .size(256px, 28px);
+    padding: 2px;
+    border-width: 0;
+    background: var(--dmc-input-compact-bg-color);
+    &:hover:not(&-disabled):not(&-focused) {
+      background: var(--dmc-input-compact-bg-hover-color);
+    }
+    .@{prefixCls}-handler-wrap {
+      height: calc(100% + 4px);
+      margin-right: -2px;
+      border-left-color: var(--dmc-input-compact-border-color);
+    }
+
+    .@{prefixCls}-handler-up {
+      border-bottom-color: var(--dmc-input-compact-border-color);
+    }
+  }
+
+  &-menu-bg {
+    color: var(--dmc-input-text-mb-color);
+    background: var(--dmc-input-bg-mb-color);
+
+    .@{prefixCls}-input {
+      .placeholder(var(--dmc-input-text-placeholder-mb-color));
+      // .input-box-shadow(var(--dmc-primary-menu-300-color));
+    }
+
+    .@{prefixCls}-handler-wrap {
+      color: var(--dmc-input-number-extra-mb-color);
+      background: var(--dmc-input-number-extra-bg-mb-color);
+    }
+
+    &:hover:not(.@{prefixCls}-disabled):not(.@{prefixCls}-focused) {
+      background: var(--dmc-input-bg-mb-hover-color);
+      // .@{prefixCls}-input {
+      //   .input-box-shadow(var(--dmc-primary-menu-200-color));
+      // }
+    }
+
+    &.@{prefixCls}-disabled {
+      background: var(--dmc-input-bg-mb-disabled-color);
+      // .@{prefixCls}-input {
+      //   .input-box-shadow(var(--dmc-primary-menu-400-color));
+      // }
+    }
+  }
+
+  &-disabled {
+    background: var(--dmc-input-bg-disabled-color);
+    &::after {
+      .position-tb();
+      z-index: 1;
+      width: 100%;
+      cursor: not-allowed;
+      opacity: 0;
+      content: '';
+    }
+  }
+
+  &-focused {
+    .focused-border();
+    border-color: var(--dmc-input-border-focus-color);
+  }
+
+  &&-error-status {
+    .focused-border();
+    border-color: var(--dmc-input-error-color);
+  }
+
+  &&-warning-status {
+    .focused-border();
+    border-color: var(--dmc-input-warning-color);
+  }
+
+  &&-success-status {
+    .focused-border();
+    border-color: var(--dmc-input-success-color);
+  }
+
+  &-block {
+    width: 100%;
+  }
+
+  &-centered &-input {
+    text-align: center;
+  }
+
+  &-visibility-handler &-handler-wrap {
+    display: none;
+  }
+}

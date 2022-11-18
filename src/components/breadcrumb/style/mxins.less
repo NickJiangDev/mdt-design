@@ -1,0 +1,18 @@
+@import '../../style/mixins/index.less';
+@prefix: dmc-breadcrumb;
+
+.link-type() {
+  .@{prefix}-item-link {
+    .flex-ai(center, inline-flex);
+    margin: 0 6px;
+    color: var(--dmc-breadcrumb-color);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  &:hover {
+    .@{prefix}-item-link,
+    a {
+      color: var(--dmc-breadcrumb-hover-color);
+    }
+  }
+}

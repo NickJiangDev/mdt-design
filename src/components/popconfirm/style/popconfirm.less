@@ -1,0 +1,21 @@
+@import './mixin';
+
+@prefixCls: dmc-popconfirm;
+
+.@{prefixCls} {
+  &-container.dmc-notification-container {
+    width: 260px;
+    padding: 0 0 0 30px;
+    border: none;
+    box-shadow: none;
+
+    .dmc-notification-container-icon {
+      top: 0;
+      left: 0;
+    }
+  }
+
+  &-container.dmc-notification-container-no-icon {
+    padding: 0;
+  }
+}

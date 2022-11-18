@@ -1,0 +1,35 @@
+.mdt-table-scroll-x {
+  position: relative;
+  box-sizing: border-box;
+  height: 23px;
+  border-radius: 12px;
+  width: 400px;
+  border: 1px solid var(--dmc-menu-border-color);
+  background-color: var(--dmc-menu-bg-color);
+  display: flex;
+  align-items: center;
+  user-select: none;
+  &-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 300%;
+  }
+  &-bar {
+    display: inline-block;
+    min-width: 20px;
+    height: 15px;
+    background-color: var(--dmc-menu-bg-active-color);
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  &-left-icon {
+    margin-left: 4px;
+  }
+  &-right-icon {
+    margin-right: 4px;
+  }
+  .dmc-icon {
+    display: flex;
+  }
+}

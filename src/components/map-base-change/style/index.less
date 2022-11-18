@@ -1,0 +1,95 @@
+@import './mixin';
+@prefixCls: dmc-map-base-change;
+
+.@{prefixCls} {
+  display: inline-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 220px;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: var(--dmc-mbc-bgc);
+  border: 1px solid var(--dmc-mbc-border-color);
+  &-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 40px;
+    .dmc-btn-icon-only-icon {
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  &-line {
+    height: 1px;
+    background-color: var(--dmc-mbc-border-color);
+    margin-bottom: 8px;
+    margin-right: 11px;
+  }
+  &-group-item {
+    margin-right: 8px;
+  }
+  &-content {
+    border-top: 1px solid var(--dmc-mbc-border-color);
+    max-height: 280px;
+    padding: 10px 0 3px 11px;
+    overflow: auto;
+    .scrollbar(transparent, transparent, 0, 0, 0);
+    &-style {
+      display: inline-flex;
+      position: relative;
+      box-sizing: border-box;
+      width: 93px;
+      height: 64px;
+      margin-bottom: 8px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      &:hover {
+        box-shadow: 0 0 0 2px var(--dmc-mbc-border-active-color);
+        .@{prefixCls}-content-style-label {
+          background-color: var(--dmc-mbc-name-active-bgc);
+          & > div {
+            color: var(--dmc-mbc-name-active-color);
+          }
+        }
+      }
+      &-label {
+        box-sizing: border-box;
+        position: absolute;
+        padding: 0 8px;
+        bottom: 4px;
+        left: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: calc(100% - 8px);
+        height: 19px;
+        background-color: var(--dmc-mbc-name-bgc);
+        border-radius: 4px;
+        pointer-events: none;
+        & > div {
+          color: var(--dmc-mbc-name-color);
+          font-size: 12px;
+          font-weight: 500;
+          //transform: scale(0.833333);
+          .text-ellipsis(1);
+        }
+      }
+    }
+  }
+  &-selected {
+    box-shadow: 0 0 0 2px var(--dmc-mbc-border-active-color);
+    .@{prefixCls}-content-style-label {
+      background-color: var(--dmc-mbc-name-active-bgc);
+      & > div {
+        color: var(--dmc-mbc-name-active-color);
+      }
+    }
+  }
+}

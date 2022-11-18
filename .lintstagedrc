@@ -1,0 +1,15 @@
+{
+  "src/**": "node scripts/commit-check.js",
+  "src/**/*.less": [
+    "yarn lint-stage:style",
+    "yarn ct"
+  ],
+  "src/**/*.{ts,tsx}": [
+    "yarn lint-stage:ts",
+    "yarn ct"
+  ],
+  "src/**/*.{tsx,ts,less,md,json}": [
+    "yarn prettier:stage",
+    "yarn ct"
+  ]
+}

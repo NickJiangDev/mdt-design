@@ -1,0 +1,30 @@
+@import './mixin';
+
+@prefixCls: dmc-btn-switch;
+
+.@{prefixCls} {
+  .btn-common();
+  height: 32px;
+  padding: 0 22px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  border: 2px solid var(--dmc-switch-border-color);
+  border-radius: 6px;
+
+  .switch-bg-color-text-color(var(--dmc-switch-bg-color), var(--dmc-switch-text-color));
+
+  &:hover {
+    .switch-bg-color-text-color(var(--dmc-switch-bg-hover-color), var(--dmc-switch-text-hover-color));
+  }
+
+  &&-checked {
+    border-color: var(--dmc-switch-border-active-color);
+    .switch-bg-color-text-color(var(--dmc-switch-bg-active-color), var(--dmc-switch-text-active-color));
+
+    &:hover {
+      border-color: var(--dmc-switch-border-active-hover-color);
+      .switch-bg-color-text-color(var(--dmc-switch-bg-active-hover-color), var(--dmc-switch-text-active-hover-color));
+    }
+  }
+}

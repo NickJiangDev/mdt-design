@@ -1,0 +1,102 @@
+@import './mixin';
+
+@prefixCls: dmc-btn-nav;
+
+.@{prefixCls} {
+  .btn-common();
+  height: 27px;
+  padding: 0 18px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  border: none;
+  border-radius: 6px;
+
+  &-container {
+    .flex-ai(center);
+    z-index: @zindex-base;
+  }
+
+  &-bg {
+    .position();
+  }
+
+  .btn-color(
+    @prefixCls,
+    var(--dmc-nav-bg-color),
+    var(--dmc-nav-text-color),
+    var(--dmc-nav-bg-hover-color),
+    var(--dmc-nav-text-hover-color),
+    var(--dmc-nav-bg-active-color),
+    var(--dmc-nav-text-active-color)
+  );
+
+  &-danger {
+    .btn-color(
+      @prefixCls,
+      var(--dmc-nav-bg-danger-color),
+      var(--dmc-nav-text-danger-color),
+      var(--dmc-nav-bg-danger-hover-color),
+      var(--dmc-nav-text-danger-hover-color),
+      var(--dmc-nav-bg-danger-active-color),
+      var(--dmc-nav-text-danger-active-color)
+    );
+  }
+
+  &-success {
+    .btn-color(
+      @prefixCls,
+      var(--dmc-nav-bg-success-color),
+      var(--dmc-nav-text-success-color),
+      var(--dmc-nav-bg-success-hover-color),
+      var(--dmc-nav-text-success-hover-color),
+      var(--dmc-nav-bg-success-active-color),
+      var(--dmc-nav-text-success-active-color)
+    );
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    &.@{prefixCls} {
+      .btn-bg-color-text-color(
+        @prefixCls,
+        var(--dmc-nav-bg-disabled-color),
+        var(--dmc-nav-text-disabled-color)
+      );
+
+      &-danger {
+        .btn-bg-color-text-color(
+          @prefixCls,
+          var(--dmc-nav-bg-danger-disabled-color),
+          var(--dmc-nav-text-danger-disabled-color)
+        );
+      }
+
+      &-success {
+        .btn-bg-color-text-color(
+          @prefixCls,
+          var(--dmc-nav-bg-success-disabled-color),
+          var(--dmc-nav-text-success-disabled-color)
+        );
+      }
+    }
+  }
+
+  &-icon-loading {
+    .square(16px);
+    animation: dmc-spin 1s infinite linear;
+  }
+
+  &-container-loading {
+    .@{prefixCls} {
+      &-context {
+        visibility: hidden;
+      }
+
+      &-icon-wrapper {
+        .position();
+        .flex-ai-jc(center, center);
+      }
+    }
+  }
+}

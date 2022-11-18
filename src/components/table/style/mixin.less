@@ -1,0 +1,180 @@
+@import '../../style/mixins/index.less';
+@import './variable.less';
+
+.bg-even-or-odd(@type) {
+  @color: ~'@{type}-body-text-color';
+  color: @@color;
+
+  &:nth-child(even) {
+    td {
+      @body-even-bg-color: ~'@{type}-body-even-bg-color';
+      background: @@body-even-bg-color;
+    }
+  }
+
+  &:nth-child(odd) {
+    td {
+      @body-odd-bg-color: ~'@{type}-body-odd-bg-color';
+      background: @@body-odd-bg-color;
+    }
+  }
+}
+
+.fix-column-after() {
+  width: 20px;
+  pointer-events: none;
+  content: '';
+  transition: box-shadow 0.3s;
+}
+
+.table-type-color(@type) {
+  @border-color: ~'@{type}-border-color';
+  @body-row-height: ~'@{type}-body-row-height';
+  @body-row-padding-left: ~'@{type}-body-row-padding-left';
+  @head-bg-color: ~'@{type}-head-bg-color';
+
+  .@{table-prefix}-cell {
+    height: @@body-row-height;
+    padding-right: @@body-row-padding-left;
+    padding-left: @@body-row-padding-left;
+    border-bottom: 1px solid @@border-color;
+    border-left: 1px solid @@border-color;
+  }
+
+  &.@{table-prefix}-without-vertical-border {
+    .@{table-prefix}-cell {
+      border: none;
+      border-bottom: 1px solid @@border-color;
+    }
+
+    .@{table-prefix}-cell:nth-of-type(1) {
+      border-left: 1px solid @@border-color;
+    }
+
+    .@{table-prefix}-cell-left-border {
+      border-left: 1px solid @@border-color;
+    }
+
+    .@{table-prefix}-row {
+      .@{table-prefix}-cell:nth-of-type(1) {
+        border-left: 1px solid @@border-color;
+      }
+
+      .@{table-prefix}-cell:last-of-type {
+        border-right: 1px solid @@border-color;
+      }
+    }
+
+    .@{table-prefix}-thead {
+      .@{table-prefix}-cell {
+        border-top: 1px solid @@border-color;
+      }
+    }
+  }
+
+  thead,
+  .@{table-prefix}-header {
+    .@{table-prefix}-cell {
+      @color: ~'@{type}-head-text-color';
+      @head-row-height: ~'@{type}-head-row-height';
+      @padding-left: ~'@{type}-head-row-padding-left';
+      height: @@head-row-height;
+      padding-right: @@padding-left;
+      padding-left: @@padding-left;
+      color: @@color;
+      background: @@head-bg-color;
+      border-top: 1px solid @@border-color;
+      border-bottom: 2px solid @@border-color;
+
+      &:nth-of-type(1) {
+        border-top-left-radius: 6px;
+      }
+
+      &:nth-last-of-type(1) {
+        border-right: 1px solid @@border-color;
+        border-top-right-radius: 6px;
+      }
+    }
+  }
+
+  tbody {
+    // border-right: 1px solid @@border-color;
+
+    & > tr:nth-last-of-type(1) {
+      td {
+        &:nth-of-type(1) {
+          border-bottom-left-radius: 6px;
+        }
+
+        &:nth-last-of-type(1) {
+          border-bottom-right-radius: 6px;
+        }
+      }
+    }
+
+    & > tr {
+      td {
+        &:nth-last-of-type(1) {
+          border-right: 1px solid @@border-color;
+        }
+      }
+    }
+  }
+
+  tbody tr,
+  &.@{table-prefix}-virtual-body .@{table-prefix}-cell {
+    .bg-even-or-odd(@type);
+  }
+
+  &.@{table-prefix}-virtual-table {
+    .@{table-prefix}-virtual-body {
+      position: relative;
+      border-bottom: 1px solid @@border-color;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+
+      .@{table-prefix}-cell-right-border {
+        border-right: 1px solid @@border-color;
+      }
+    }
+
+    thead {
+      border-right: 1px solid @@border-color;
+    }
+
+    .@{table-prefix}-cell-scrollbar::after {
+      .position(absolute, 0, '', 0, -2px);
+      width: 2px;
+      content: '';
+      background: @@head-bg-color;
+    }
+  }
+
+  .@{table-prefix}-content {
+    @scrollbar-color: ~'@{type}-scrollbar-color';
+    border-radius: 5px 0 0 0;
+    .scrollbar(transparent, @@scrollbar-color, 7px, 7px, 7px);
+  }
+
+  .@{table-prefix}-body {
+    @scrollbar-color: ~'@{type}-scrollbar-color';
+    // border-radius: 5px 0 0 0;
+    .scrollbar(transparent, @@scrollbar-color, 7px, 7px, 7px);
+  }
+
+  &.@{table-prefix}-ping-left {
+    .@{table-prefix}-cell-fix-left-first::after,
+    .@{table-prefix}-cell-fix-left-last::after {
+      @bs-color: ~'@{type}-fix-bs-color';
+      box-shadow: inset 10px 0 8px -8px @@bs-color;
+    }
+  }
+
+  &.@{table-prefix}-ping-right {
+    .@{table-prefix}-cell-fix-right-first::after,
+    .@{table-prefix}-cell-fix-right-last::after {
+      @bs-color: ~'@{type}-fix-bs-color';
+      box-shadow: inset -10px 0 8px -8px @@bs-color;
+    }
+  }
+}

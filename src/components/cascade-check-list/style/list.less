@@ -1,0 +1,81 @@
+@import '../../style/mixins/index';
+
+@prefixCls: cascade-modified-list;
+
+.@{prefixCls} {
+  .dmc-list {
+    background: inherit;
+    border: none;
+    .ReactVirtualized__Grid:focus {
+      outline: none;
+    }
+  }
+  .dmc-checkbox-title {
+    font-size: 14px;
+  }
+  .textOverflow () {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .dmc-input {
+    width: auto;
+    min-height: 25px;
+    margin: 6px 9px;
+    border: none;
+  }
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 156px;
+  max-height: 344px;
+  padding: 6px 0;
+  overflow: auto;
+  color: var(--dmc-menu-text-color);
+  font-size: 14px;
+  background-color: var(--dmc-menu-bg-color);
+  border: 1px solid var(--dmc-menu-border-color);
+  border-radius: 4px;
+  box-shadow: var(--dmc-menu-shadow);
+  user-select: none;
+  overscroll-behavior: none;
+  .title-wrapper {
+    padding: 0 6px;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .title {
+      color: var(--dmc-menu-text-color);
+      .textOverflow();
+    }
+  }
+  .select-all {
+    padding-left: 7px;
+  }
+  .virtualized-list-wrapper {
+    flex: 1;
+    overflow: hidden auto;
+    overscroll-behavior: none;
+    .@{prefixCls}-item {
+      display: flex;
+      align-items: center;
+      min-height: 36px;
+      padding-right: 11px;
+      padding-left: 7px;
+      cursor: pointer;
+      &:hover {
+        color: var(--dmc-menu-text-hover-color);
+        background-color: var(--dmc-menu-hover-color);
+      }
+    }
+    .no-mouse-event {
+      pointer-events: none;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    // firefox
+    scrollbar-width: none;
+  }
+}

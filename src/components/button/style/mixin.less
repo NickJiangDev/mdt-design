@@ -1,0 +1,134 @@
+@import '../../style/mixins/index.less';
+
+.btn-common() {
+  position: relative;
+  .flex-ai-jc(center, center, inline-flex);
+  box-sizing: border-box;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  border-radius: 6px;
+  .text-ellipsis();
+}
+
+.btn-color(
+  @prefixCls,
+  @bgColor,
+  @textColor,
+  @bgHoverColor,
+  @textHoverColor,
+  @bgActiveColor,
+  @textActiveColor
+) {
+  .btn-bg-color-text-color(@prefixCls, @bgColor, @textColor);
+
+  &:hover:not([disabled]) {
+    .btn-bg-color-text-color(@prefixCls, @bgHoverColor, @textHoverColor);
+  }
+
+  &:active:not([disabled]) {
+    .btn-bg-color-text-color(@prefixCls, @bgActiveColor, @textActiveColor);
+  }
+}
+
+.btn-border-color(
+  @prefixCls,
+  @borderColor,
+  @borderHoverColor,
+  @borderActiveColor
+) {
+  .@{prefixCls}-bg {
+    border: 1px solid @borderColor;
+  }
+
+  &:hover:not([disabled]) .@{prefixCls}-bg {
+    border: 1px solid @borderHoverColor;
+  }
+
+  &:active:not([disabled]) .@{prefixCls}-bg {
+    border: 1px solid @borderActiveColor;
+  }
+}
+
+.btn-bg-color-text-color(@prefixCls, @bgColor, @textColor) {
+  .@{prefixCls} {
+    &-bg {
+      background: @bgColor;
+    }
+    &-container {
+      color: @textColor;
+    }
+  }
+}
+
+.btn-opacity(
+  @prefixCls,
+  @bgColor,
+  @bgOpacity,
+  @textColor,
+  @bgHoverOpacity,
+  @textHoverColor,
+  @bgActiveOpacity,
+  @textActiveColor
+) {
+  .@{prefixCls}-bg {
+    background: @bgColor !important;
+  }
+  .btn-bg-opacity-text-color(@prefixCls, @bgOpacity, @textColor);
+
+  &:hover:not([disabled]) {
+    .btn-bg-opacity-text-color(@prefixCls, @bgHoverOpacity, @textHoverColor);
+  }
+
+  &:active:not([disabled]) {
+    .btn-bg-opacity-text-color(@prefixCls, @bgActiveOpacity, @textActiveColor);
+  }
+}
+
+.btn-bg-opacity-text-color(@prefixCls, @bgOpacity, @textColor) {
+  .@{prefixCls} {
+    &-bg {
+      opacity: @bgOpacity;
+    }
+    &-container {
+      color: @textColor;
+    }
+  }
+}
+
+.button-icon-size(@dir, @size: 16px) {
+  .square(@size);
+  margin-@{dir}: 4px;
+}
+
+.switch-bg-color-text-color(@bgColor, @textColor) {
+  color: @textColor;
+  background: @bgColor;
+}
+
+.border-icon(@prefixCls, @bgColor, @bgHoverColor) {
+  background: @bgColor;
+
+  &:hover,
+  &:active,
+  &.@{prefixCls}-actived {
+    background: @bgHoverColor;
+  }
+}
+
+.without-border(@prefixCls) {
+  .@{prefixCls}-bg {
+    border: none !important;
+  }
+
+  &:hover:not([disabled]) .@{prefixCls}-bg {
+    border: none !important;
+  }
+
+  &:active:not([disabled]) .@{prefixCls}-bg {
+    border: none !important;
+  }
+}

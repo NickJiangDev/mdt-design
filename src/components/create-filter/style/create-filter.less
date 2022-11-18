@@ -1,0 +1,71 @@
+@import './mixin.less';
+@prefixCls: dmc-create-filter;
+
+.@{prefixCls} {
+  .flex-dir(column);
+  box-sizing: border-box;
+  padding: 20px;
+  background: var(--dmc-create-filter-bg-color);
+  border: 1px solid var(--dmc-border-page-color);
+  border-radius: 4px;
+  box-shadow: var(--dmc-create-filter-shadow-color);
+
+  &-popup.dmc-tooltip {
+    max-width: initial;
+    pointer-events: none;
+
+    .dmc-tooltip-arrow {
+      display: none;
+    }
+    .dmc-tooltip-inner {
+      padding: 0;
+      background: transparent;
+      opacity: 1;
+    }
+  }
+
+  &-content {
+    flex: 1;
+    overflow: auto;
+    .overwrite-scrollbar(menu-bg);
+  }
+
+  &-footer {
+    display: flex;
+    flex: 0;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-btns {
+    .dmc-btn {
+      margin-left: 6px;
+    }
+  }
+
+  &-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-extra {
+    color: var(--dmc-create-filter-icon-color);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  &-icon-loading {
+    width: 18px;
+    height: 18px;
+    color: var(--dmc-create-filter-icon-color);
+    animation: loadingCircle 1s infinite linear;
+
+    @keyframes loadingCircle {
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

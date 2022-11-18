@@ -1,0 +1,159 @@
+# 使用<https://gitlab.idatatlas.com/new-datamap/mdt-design/-/ci/lint>调试CI
+# https://gitlab.com/gitlab-org/gitlab-foss/-/issues/12963
+
+default:
+  interruptible: true
+
+variables:
+  IMAGE: ${DOCKER_REGISTRY}/mdt-design:base
+  # KUBERNETES_MEMORY_REQUEST: 16Gi
+
+cache:
+  untracked: true
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules/
+
+stages:
+  - build-image
+  - test
+  - build-artifact
+  - deploy
+  - after-deploy
+
+.only_build_changes:
+  only: &build_changes
+    changes:
+      - public/**/*
+      - src/**/*
+      - craco.config.js
+      - jest.config.js
+      - setupTests.js
+      - package.json
+      - yarn.lock
+
+build-image:
+  stage: build-image
+  script:
+    - docker build -t ${IMAGE} -f docker/Dockerfile .
+    - docker push ${IMAGE}
+  tags:
+    - build-ssh-new-datamap
+  only:
+    - master
+  when: manual
+
+unit_test:
+  # extends: .only_build_changes
+  image: ${IMAGE}
+  stage: test
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  tags:
+    - build-docker-for-web-with-shared
+  script:
+    - ln -s /npm/node_modules ./node_modules
+    - yarn install --ignore-scripts
+    - yarn test-ci
+
+build_artifact_dev_docs:
+  stage: build-artifact
+  image: ${IMAGE}
+  variables:
+    # https://github.com/webpack/webpack-sources/issues/66
+    NODE_OPTIONS: --max-old-space-size=8096
+    ARTIFACTS_FILE: mdtd_docs.tar.gz
+  script:
+    - ln -s /npm/node_modules ./node_modules
+    - yarn install --ignore-scripts
+    - CI=false yarn run bs
+    - cd docs
+    - tar -czvf ../"${ARTIFACTS_FILE}" .
+    # - test -ef .. ${CI_PROJECT_DIR} || mv ../"${ARTIFACTS_FILE}" ${CI_PROJECT_DIR}
+  artifacts:
+    paths:
+      - '*.tar.gz'
+    expire_in: 2 days
+  tags:
+    - build-docker-for-web-with-shared
+  only:
+    - /^dev_docs_.*/
+    - /^v.*/
+
+deploy_artifact_dev_docs:
+  stage: deploy
+  tags:
+    - dev-101
+  variables:
+    DEPLOY_DIR: /var/www/mdtd_docs
+    ARTIFACTS_FILE: mdtd_docs.tar.gz
+  script:
+    - mkdir -p "${DEPLOY_DIR}"
+    - tar --touch -xvf "${ARTIFACTS_FILE}" -C "${DEPLOY_DIR}"
+    - find "${DEPLOY_DIR}" -name "*.map" -delete
+    - rm -f `find "${DEPLOY_DIR}" -mtime +3 -type f`
+  only:
+    - /^dev_docs_.*/
+    - /^v.*/
+  needs:
+    - job: build_artifact_dev_docs
+      artifacts: true
+
+
+after-deploy:
+  stage: after-deploy
+  image: ${IMAGE}
+  variables:
+    CI_NAME: "gitlab"
+    CI_EMAIL: "gitlab-ci@idatatlas.com"
+  script:
+    - ln -s /npm/node_modules ./node_modules
+    - yarn install
+    - git config --global user.email $CI_EMAIL
+    - git config --global user.name $CI_NAME
+    - git pull origin release --allow-unrelated-histories
+    - git checkout master
+    - git reset --hard origin/master
+    - git pull --rebase
+    - DEBUG=conventional-dingtalk CONVENTIONAL_DINGTALK_TOKEN=${DING_TK} yarn release2dingtalk
+  tags:
+    - build-docker-for-web-with-shared
+  only:
+    - /^v.*/
+
+publish_npm:
+  stage: build-artifact
+  image: ${IMAGE}
+  variables:
+    # https://github.com/webpack/webpack-sources/issues/66
+    NODE_OPTIONS: --max-old-space-size=8096
+    ARTIFACTS_FILE: mdtd_npm.tar.gz
+    CI_NAME: "gitlab"
+    CI_EMAIL: "gitlab-ci@idatatlas.com"
+  script:
+    - ln -s /npm/node_modules ./node_modules
+    - yarn install --ignore-scripts
+    - git config --global user.email $CI_EMAIL
+    - git config --global user.name $CI_NAME
+    - git config receive.advertisePushOptions true
+    - git pull origin master --allow-unrelated-histories
+    - git checkout master
+    - git reset --hard origin/master
+    - git tag -l | xargs git tag -d && git fetch -t
+    - git pull --rebase
+    - mv .husky /.husky
+    - CI=false yarn prepub-ci
+    - mv /.husky .husky
+    - cd dist
+    - touch .npmrc
+    # - npm-cli-login -u ${NPM_USERNAME} -p ${NPM_PASSWORD} -e ${NPM_EMAIL} -r ${NPM_REGISTRY} --config-path ".npmrc"
+    - echo -e "//${NPM_REGISTRY}/:_authToken=${NPM_TOKEN}\nregistry=https://${NPM_REGISTRY}/\nhttps://${NPM_REGISTRY}:always-auth=true" >> .npmrc
+    - cat .npmrc
+    - npm publish --access public
+    - cd ../
+    - git pull --rebase
+    - git push https://gitlab-ci-token:${CI_TOKEN}@gitlab.idatatlas.com/new-datamap/mdt-design.git master:master
+    - DEBUG=conventional-gitlab-releaser CONVENTIONAL_GITLAB_RELEASER_TOKEN=${DEPLOY_TOKEN} yarn gitlab-release
+  tags:
+    - build-docker-for-web-with-shared
+  only:
+    - release

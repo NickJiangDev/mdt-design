@@ -1,0 +1,33 @@
+@import 'variable';
+@import '../../style/mixins/index';
+
+.@{prefixCls}-circle {
+  display: flex;
+  flex-flow: wrap;
+  margin: -5px -2px 2px;
+  max-height: 95px;
+  overflow: scroll;
+  .scrollbar(transparent, var(--dmc-scrollbar-mb-color), 7px, 0, 7px);
+
+  &-swatch {
+    .square(19px);
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+  }
+
+  &-swatch-wrap {
+    .square(25px);
+    .flex-ai-jc(center, center);
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-left: 2px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+
+    &.active {
+      border-color: var(--dmc-blue-400-color);
+    }
+  }
+}

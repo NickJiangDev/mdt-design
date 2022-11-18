@@ -1,0 +1,146 @@
+@import './mixin';
+
+@prefixCls: dmc-toast-container;
+
+.@{prefixCls} {
+  .flex-ai(center);
+  position: relative;
+  box-sizing: border-box;
+  min-width: 140px;
+  max-width: 500px;
+  padding: 10px 20px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 6px;
+  box-shadow: var(--dmc-toast-shadow-color);
+
+  & &-close {
+    .square(16px);
+    margin-left: 10px;
+    color: var(--dmc-toast-close-color);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--dmc-toast-close-hover-color);
+    }
+    &:active {
+      color: var(--dmc-toast-close-color);
+    }
+  }
+
+  &-button-placeholder {
+    visibility: hidden;
+  }
+
+  &-button-bg {
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    left: 0;
+    .flex-ai-jc(center, center);
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  &-button {
+    position: relative;
+    margin-right: -16px;
+    margin-left: 14px;
+    padding: 0 23px;
+
+    &::before {
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: -4px;
+      width: 1px;
+      content: '';
+    }
+  }
+
+  &-info {
+    color: var(--dmc-toast-text-color);
+    background: var(--dmc-toast-bg-color);
+
+    .@{prefixCls}-arrow {
+      border-bottom-color: var(--dmc-toast-bg-color);
+    }
+
+    .@{prefixCls}-button:before,
+    .@{prefixCls}-button-bg:hover {
+      background: var(--dmc-toast-bg-color);
+    }
+  }
+
+  &-success {
+    color: var(--dmc-toast-text-color);
+    background: var(--dmc-toast-bg-success-color);
+
+    .@{prefixCls}-arrow {
+      border-bottom-color: var(--dmc-toast-bg-success-color);
+    }
+
+    .@{prefixCls}-button:before,
+    .@{prefixCls}-button-bg:hover {
+      background: var(--dmc-toast-bg-success-color);
+    }
+  }
+
+  &-error {
+    color: var(--dmc-text-white-color);
+    background: var(--dmc-toast-bg-error-color);
+
+    .@{prefixCls}-arrow {
+      border-bottom-color: var(--dmc-toast-bg-error-color);
+    }
+
+    .@{prefixCls}-button:before,
+    .@{prefixCls}-button-bg:hover {
+      background: var(--dmc-toast-bg-error-color);
+    }
+  }
+
+  &-warning {
+    color: var(--dmc-toast-text-warning-color);
+    background: var(--dmc-toast-bg-warning-color);
+
+    .@{prefixCls}-arrow {
+      border-bottom-color: var(--dmc-toast-bg-warning-color);
+    }
+
+    .@{prefixCls}-button:before,
+    .@{prefixCls}-button-bg:hover {
+      background: var(---dmc-toast-bg-warning-color);
+    }
+
+    & .@{prefixCls}-close {
+      color: var(--dmc-toast-close-warning-color);
+
+      &:hover {
+        color: var(--dmc-toast-close-warning-hover-color);
+      }
+    }
+  }
+
+  &-message {
+    flex: 1;
+    flex-wrap: wrap;
+    word-break: break-word;
+  }
+
+  &-icon {
+    .square(22px);
+    min-width: 22px;
+    margin-right: 10px;
+  }
+
+  &-arrow {
+    .position-tr(absolute, -20px, 30%);
+    .square(0);
+    border-color: transparent;
+    border-style: solid;
+    border-width: 10px;
+  }
+}

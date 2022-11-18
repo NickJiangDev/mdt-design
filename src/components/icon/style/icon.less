@@ -1,0 +1,12 @@
+@import './mixin';
+
+@prefixCls: dmc-icon;
+.@{prefixCls} {
+  .square(24px);
+  // color: var(--dmc-icons-color);
+
+  &-load-error {
+    .square(100%);
+    color: var(--dmc-icons-error-color);
+  }
+}

@@ -1,0 +1,38 @@
+/**
+盒子模型相关（margin, border, padding, context）
+ */
+.ptb(@pt, @pb) {
+  padding-top: @pt;
+  padding-bottom: @pb;
+}
+
+.plr(@pl, @pr) {
+  padding-right: @pr;
+  padding-left: @pl;
+}
+
+.padding-vertical(@ver) {
+  .ptb(@ver, @ver);
+}
+
+.padding-horizontal(@hor) {
+  .plr(@hor, @hor);
+}
+
+.mtb(@mt, @mb) {
+  margin-top: @mt;
+  margin-bottom: @mb;
+}
+
+.mlr(@ml, @mr) {
+  margin-right: @mr;
+  margin-left: @ml;
+}
+
+.margin-vertical(@ver) {
+  .mtb(@ver, @ver);
+}
+
+.margin-horizontal(@hor) {
+  .mlr(@hor, @hor);
+}

@@ -1,0 +1,87 @@
+@import './mixin';
+
+@prefixCls: dmc-dot;
+
+.@{prefixCls} {
+  display: inline-flex;
+
+  &-dot {
+    .square(6px);
+    z-index: 1;
+    background: var(--dmc-dot-process-color);
+    border-radius: 50%;
+  }
+
+  &-error-status {
+    .@{prefixCls}-dot {
+      background: var(--dmc-dot-error-color);
+    }
+    .@{prefixCls}-text {
+      color: var(--dmc-dot-error-color);
+    }
+    &.@{prefixCls}-has-text:before {
+      background: var(--dmc-dot-error-bg-color);
+    }
+  }
+  &-warning-status {
+    .@{prefixCls}-dot {
+      background: var(--dmc-dot-warning-color);
+    }
+    .@{prefixCls}-text {
+      color: var(--dmc-dot-warning-color);
+    }
+
+    &.@{prefixCls}-has-text:before {
+      background: var(--dmc-dot-warning-bg-color);
+    }
+  }
+  &-success-status {
+    .@{prefixCls}-dot {
+      background: var(--dmc-dot-success-color);
+    }
+    .@{prefixCls}-text {
+      color: var(--dmc-dot-success-color);
+    }
+
+    &.@{prefixCls}-has-text:before {
+      background: var(--dmc-dot-success-bg-color);
+    }
+  }
+
+  &-canceled-status {
+    .@{prefixCls}-dot {
+      background: var(--dmc-dot-canceled-color);
+    }
+    .@{prefixCls}-text {
+      color: var(--dmc-dot-canceled-color);
+    }
+
+    &.@{prefixCls}-has-text:before {
+      background: var(--dmc-dot-canceled-bg-color);
+    }
+  }
+
+  &-has-text {
+    .flex-ai(center);
+    position: relative;
+    padding: 2px 8px;
+    overflow: hidden;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    border-radius: 100px;
+
+    &::before {
+      .position();
+      background: var(--dmc-dot-process-bg-color);
+      opacity: 0.2;
+      content: '';
+    }
+  }
+
+  &-text {
+    z-index: 1;
+    margin-left: 6px;
+    color: var(--dmc-dot-process-color);
+  }
+}

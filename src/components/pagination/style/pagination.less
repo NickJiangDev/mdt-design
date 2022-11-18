@@ -1,0 +1,49 @@
+@import './mixins.less';
+
+.@{prefix} {
+  .flex-ai(center);
+
+  &-prev {
+    border-radius: @dmc-pagination-border-radius 0 0 @dmc-pagination-border-radius;
+  }
+
+  &-next {
+    border-radius: 0 @dmc-pagination-border-radius @dmc-pagination-border-radius 0;
+  }
+
+  &-item {
+    a {
+      .flex-ai-jc(center, center);
+      .square(100%);
+      outline: none;
+    }
+  }
+
+  &-prev,
+  &-next {
+    a {
+      outline: none;
+    }
+  }
+
+  li {
+    .flex-ai-jc(center, center);
+    color: @dmc-pagination-color;
+    font-size: @dmc-pagination-font-size;
+    line-height: @dmc-pagination-line-height;
+    list-style: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .size-type('');
+
+  &-compact {
+    .size-type(-compact);
+  }
+
+  .bg-type('');
+
+  &-assist {
+    .bg-type(-assist);
+  }
+}

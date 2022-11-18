@@ -1,0 +1,50 @@
+@import 'variable';
+@import '../../style/mixins/index';
+
+.@{prefixCls}-favor {
+  padding: 10px;
+
+  &-top {
+    .flex-ai-jc(center, space-between);
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+
+  &-btns {
+    display: flex;
+  }
+
+  &-add {
+    .square(15px);
+    margin-left: 5px;
+    color: var(--dmc-colorpicker-content-text-color);
+  }
+
+  &-expand {
+    .square(15px);
+    color: var(--dmc-colorpicker-content-text-color);
+    transition: 0.2s ease transform;
+
+    &.expand {
+      transform: rotate(180deg);
+    }
+  }
+  &-label {
+    color: var(--dmc-colorpicker-content-text-color);
+    font-size: 12px;
+  }
+
+  &-placeholder {
+    .flex-ai(center);
+    color: var(--dmc-colorpicker-placeholder-color);
+    font-size: 12px;
+
+    &-circle {
+      .square(17px);
+      display: inline-block;
+      margin-right: 5px;
+      border: 1px solid var(--dmc-colorpicker-placeholder-color);
+      border-radius: 50%;
+    }
+  }
+}

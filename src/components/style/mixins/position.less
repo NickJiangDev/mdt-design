@@ -1,0 +1,52 @@
+/**
+ 设置位置，一般是脱离文档流
+ */
+.position(@pos: absolute, @t: 0, @r: 0, @b: 0, @l: 0) {
+  position: @pos;
+  top: @t;
+  right: @r;
+  bottom: @b;
+  left: @l;
+}
+
+.position-tr(@pos: absolute, @t: 0, @r: 0) {
+  position: @pos;
+  top: @t;
+  right: @r;
+}
+
+.position-tl(@pos: absolute, @t: 0, @l: 0) {
+  position: @pos;
+  top: @t;
+  left: @l;
+}
+
+.position-tb(@pos: absolute, @t: 0, @b: 0) {
+  position: @pos;
+  top: @t;
+  bottom: @b;
+}
+
+.position-rl(@pos: absolute, @r: 0, @l: 0) {
+  position: @pos;
+  right: @r;
+  left: @l;
+}
+
+.position-bl(@pos: absolute, @b: 0, @l: 0) {
+  position: @pos;
+  bottom: @b;
+  left: @l;
+}
+
+.position-br(@pos: absolute, @r: 0, @b: 0) {
+  position: @pos;
+  right: @r;
+  bottom: @b;
+}
+
+.position-center() {
+  .position-tl(absolute, 50%, 50%);
+  margin-top: -50%;
+  margin-left: -50%;
+}

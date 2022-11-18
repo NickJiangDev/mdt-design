@@ -1,0 +1,32 @@
+.rdg-row {
+  position: absolute;
+  left: 0;
+  display: flex;
+  width: var(--row-width);
+  height: var(--row-height);
+  line-height: var(--row-height);
+  background-color: var(--background-color);
+  contain: strict;
+  contain: size layout style paint;
+
+  // &:hover {
+  //   background-color: var(--row-hover-background-color);
+  // }
+}
+
+// .rdg-row-selected {
+//   background-color: var(--row-selected-background-color);
+
+//   &:hover {
+//     background-color: var(--row-selected-hover-background-color);
+//   }
+// }
+
+.rdg-summary-row {
+  position: sticky;
+  z-index: 3;
+
+  > .rdg-cell {
+    border-top: 2px solid var(--summary-border-color);
+  }
+}

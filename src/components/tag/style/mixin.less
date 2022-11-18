@@ -1,0 +1,9 @@
+@import '../../style/mixins/index.less';
+
+.colorful-text-bg-color(@prefix, @text-color, @bg-color, @close-color) {
+  color: @text-color;
+  background: @bg-color;
+  .@{prefix}-close {
+    color: @close-color;
+  }
+}

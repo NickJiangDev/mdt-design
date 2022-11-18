@@ -1,0 +1,31 @@
+@import './mxins.less';
+
+.@{prefix} {
+  .flex-ai(center);
+  color: var(--dmc-breadcrumb-slot-color);
+  font-size: 13px;
+  line-height: 18px;
+
+  &-item {
+    .flex-ai(center, inline-flex);
+    .link-type();
+    .dmc-icon {
+      .square(16px);
+    }
+    a {
+      color: var(--dmc-breadcrumb-color);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    &:not(.@{prefix}-item-prev):nth-last-of-type(1) {
+      .@{prefix}-item-link {
+        color: var(--dmc-breadcrumb-current-color);
+        cursor: auto;
+      }
+    }
+  }
+
+  &-item-prev {
+    .link-type();
+  }
+}

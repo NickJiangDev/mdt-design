@@ -1,0 +1,103 @@
+@import './mixin';
+
+@prefixCls: dmc-side-nav;
+
+.@{prefixCls} {
+  width: 210px;
+  height: 100%;
+  padding: 24px 12px;
+  background: var(--dmc-sidenav-bg-color);
+
+  &-ghost {
+    background: transparent;
+  }
+
+  &-item {
+    .flex-ai(center);
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &-mark {
+      padding-left: 12px;
+      border-left: 4px solid transparent;
+      border-radius: 4px;
+    }
+
+    &-label {
+      margin-left: 8px;
+      color: var(--dmc-sidenav-item-text-color);
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    &:hover:not(&-actived):not(&-disabled) {
+      background: var(--dmc-sidenav-item-bg-hover-color);
+      .@{prefixCls}-item-label {
+        color: var(--dmc-sidenav-item-text-hover-color);
+      }
+    }
+
+    &-actived {
+      background: var(--dmc-sidenav-item-bg-active-color);
+      .@{prefixCls}-item-label {
+        color: var(--dmc-sidenav-item-text-active-color);
+      }
+
+      &.@{prefixCls}-item-mark {
+        border-left-color: var(--dmc-sidenav-item-text-active-mark-color);
+      }
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      .@{prefixCls}-item-label {
+        color: var(--dmc-sidenav-item-text-disabled-color);
+      }
+    }
+  }
+
+  &-assist-bg {
+    background: var(--dmc-sidenav-ab-item-bg-color);
+    .@{prefixCls}-item {
+      &:hover:not(.@{prefixCls}-item-actived):not(.@{prefixCls}-item-disabled) {
+        background: var(--dmc-sidenav-ab-item-bg-hover-color);
+        .@{prefixCls}-item-label {
+          color: var(--dmc-sidenav-ab-item-text-hover-color);
+        }
+      }
+      &-actived {
+        background: var(--dmc-sidenav-ab-item-bg-active-color);
+      }
+      &-disabled {
+        cursor: not-allowed;
+        .@{prefixCls}-item-label {
+          color: var(--dmc-sidenav-item-text-disabled-color);
+        }
+      }
+    }
+  }
+
+  &-page-bg {
+    background: var(--dmc-sidenav-pb-item-bg-color);
+    .@{prefixCls}-item {
+      &:hover:not(.@{prefixCls}-item-actived) {
+        background: var(--dmc-sidenav-pb-item-bg-hover-color);
+        .@{prefixCls}-item-label {
+          color: var(--dmc-sidenav-pb-item-text-hover-color);
+        }
+      }
+      &-actived {
+        background: var(--dmc-sidenav-pb-item-bg-active-color);
+      }
+      &-disabled {
+        cursor: not-allowed;
+        .@{prefixCls}-item-label {
+          color: var(--dmc-sidenav-item-text-disabled-color);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@import './mixin';
+
+@dropdownPrefixCls: dmc-dropdown;
+
+.@{dropdownPrefixCls} {
+  .position-tl(absolute, -9999px, -9999px);
+  z-index: @zindex-dropdown;
+  display: block;
+
+  &-hidden {
+    display: none;
+  }
+
+  &-slide-up-enter,
+  &-slide-up-appear {
+    .effect();
+    opacity: 0;
+    animation-play-state: paused;
+    animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  }
+
+  &-slide-up-leave {
+    .effect();
+    opacity: 1;
+    animation-play-state: paused;
+    animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+  }
+
+  &-slide-up-enter&-slide-up-enter-active&-placement-bottomLeft,
+  &-slide-up-appear&-slide-up-appear-active&-placement-bottomLeft,
+  &-slide-up-enter&-slide-up-enter-active&-placement-bottomCenter,
+  &-slide-up-appear&-slide-up-appear-active&-placement-bottomCenter,
+  &-slide-up-enter&-slide-up-enter-active&-placement-bottomRight,
+  &-slide-up-appear&-slide-up-appear-active&-placement-bottomRight {
+    animation-name: dmc-slide-up-in;
+    animation-play-state: running;
+  }
+
+  &-slide-up-enter&-slide-up-enter-active&-placement-topLeft,
+  &-slide-up-appear&-slide-up-appear-active&-placement-topLeft,
+  &-slide-up-enter&-slide-up-enter-active&-placement-topCenter,
+  &-slide-up-appear&-slide-up-appear-active&-placement-topCenter,
+  &-slide-up-enter&-slide-up-enter-active&-placement-topRight,
+  &-slide-up-appear&-slide-up-appear-active&-placement-topRight {
+    animation-name: dmc-slide-down-in;
+    animation-play-state: running;
+  }
+
+  &-slide-up-leave&-slide-up-leave-active&-placement-bottomLeft,
+  &-slide-up-leave&-slide-up-leave-active&-placement-bottomCenter,
+  &-slide-up-leave&-slide-up-leave-active&-placement-bottomRight {
+    animation-name: dmc-slide-up-out;
+    animation-play-state: running;
+  }
+
+  &-slide-up-leave&-slide-up-leave-active&-placement-topLeft,
+  &-slide-up-leave&-slide-up-leave-active&-placement-topCenter,
+  &-slide-up-leave&-slide-up-leave-active&-placement-topRight {
+    animation-name: dmc-slide-down-out;
+    animation-play-state: running;
+  }
+}

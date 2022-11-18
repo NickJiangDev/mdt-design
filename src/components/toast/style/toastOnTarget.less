@@ -1,0 +1,55 @@
+@import './mixin';
+
+@notificationPrefixCls: dmc-toast-on-target;
+.@{notificationPrefixCls} {
+  position: absolute;
+  top: calc(100% + 10px) !important;
+  right: 50% !important;
+  left: initial !important;
+  z-index: @zindex-message;
+  transform: translateX(15%);
+
+  &-notice {
+    position: relative;
+    right: initial !important;
+    display: block;
+    margin-bottom: 10px;
+
+    .dmc-toast-container {
+      &-message {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &-arrow {
+        right: calc(15% - 10px);
+      }
+    }
+
+    // &-closable {
+    //   display: none;
+    // }
+  }
+
+  &-fade-enter {
+    opacity: 0;
+    .fade-effect();
+    animation-play-state: paused;
+  }
+
+  &-fade-leave {
+    .fade-effect();
+    animation-play-state: paused;
+  }
+
+  &-fade-enter&-fade-enter-active {
+    animation-name: dmc-fade-in;
+    animation-play-state: running;
+  }
+
+  &-fade-leave&-fade-leave-active {
+    animation-name: dmc-fade-out;
+    animation-play-state: running;
+  }
+}

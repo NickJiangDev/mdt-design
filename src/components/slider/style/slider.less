@@ -1,0 +1,213 @@
+@import './mixin';
+
+@slider-prefix-cls: dmc-slider;
+
+.@{slider-prefix-cls} {
+  position: relative;
+  box-sizing: border-box;
+  height: 10px;
+  margin: 10px 6px;
+  padding: 5px 0;
+  cursor: pointer;
+  touch-action: none;
+
+  .vertical();
+  .small();
+  &-with-marks {
+    margin-bottom: 28px;
+  }
+
+  &-rail {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--dmc-slider-bg-color);
+    border-radius: 0;
+    transition: background-color 0.3s;
+  }
+
+  &-track {
+    position: absolute;
+    height: 4px;
+    background-color: var(--dmc-slider-track-color);
+    border-radius: 0;
+    transition: background-color 0.3s;
+  }
+
+  &-handle {
+    position: absolute;
+    box-sizing: border-box;
+    .square(16px);
+    margin-top: -6px;
+    background-color: var(--dmc-slider-handle-bg-color);
+    border: 1px solid var(--dmc-slider-handle-border-color);
+    border-radius: 50%;
+    box-shadow: none;
+    cursor: pointer;
+
+    &-dragging&-dragging&-dragging {
+      // TODO
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid var(--dmc-slider-handle-border-focus-color);
+    }
+  }
+
+  &:hover {
+    .@{slider-prefix-cls}-rail {
+      background-color: var(--dmc-slider-bg-hover-color);
+    }
+    .@{slider-prefix-cls}-track {
+      background-color: var(--dmc-slider-track-hover-color);
+    }
+  }
+
+  &-mark {
+    .position-tl(absolute, 18px, 0);
+    width: 100%;
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  &-mark-text {
+    position: absolute;
+    display: inline-block;
+    color: var(--dmc-slider-mark-text-color);
+    text-align: center;
+    word-break: keep-all;
+    cursor: pointer;
+    user-select: none;
+
+    &-active {
+      color: var(--dmc-slider-mark-text-active-color);
+    }
+  }
+
+  &-step {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+  }
+
+  &-dot {
+    position: absolute;
+    top: -2px;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    background-color: var(--dmc-slider-dot-color);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:first-child {
+      margin-left: -4px;
+    }
+    &:last-child {
+      margin-left: -4px;
+    }
+    &-active {
+      background-color: var(--dmc-slider-dot-active-color);
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+
+    .@{slider-prefix-cls}-track {
+      background-color: var(--dmc-slider-track-disabled-color) !important;
+    }
+
+    .@{slider-prefix-cls}-handle,
+    .@{slider-prefix-cls}-dot {
+      background-color: var(--dmc-slider-disabled-color);
+      border-color: var(--dmc-slider-disabled-color) !important;
+      box-shadow: none;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .@{slider-prefix-cls}-mark-text,
+    .@{slider-prefix-cls}-dot {
+      cursor: not-allowed !important;
+    }
+  }
+}
+
+.vertical() {
+  &-vertical {
+    width: 10px;
+    height: 100%;
+    margin: 6px 10px;
+    padding: 0 5px;
+
+    .@{slider-prefix-cls}-rail {
+      width: 4px;
+      height: 100%;
+    }
+
+    .@{slider-prefix-cls}-track {
+      width: 4px;
+    }
+
+    .@{slider-prefix-cls}-handle {
+      margin-top: -6px; // we chould consider border width as well: (10 + 2 ) / 2
+      margin-left: -6px;
+    }
+
+    .@{slider-prefix-cls}-mark {
+      top: 0;
+      left: 12px;
+      width: 20px;
+      height: 100%;
+    }
+
+    .@{slider-prefix-cls}-mark-text {
+      left: 6px;
+      white-space: nowrap;
+    }
+
+    .@{slider-prefix-cls}-step {
+      width: 4px;
+      height: 100%;
+    }
+
+    .@{slider-prefix-cls}-dot {
+      top: auto;
+      left: 2px;
+      margin-bottom: -4px;
+    }
+  }
+}
+.small() {
+  &-small {
+    .@{slider-prefix-cls}-rail {
+      height: 2px;
+    }
+    .@{slider-prefix-cls}-track {
+      height: 2px;
+    }
+    .@{slider-prefix-cls}-step {
+      height: 2px;
+    }
+    .@{slider-prefix-cls}-handle {
+      margin-top: -6px;
+    }
+  }
+}
+.@{slider-prefix-cls}-vertical .@{slider-prefix-cls}-small {
+  .@{slider-prefix-cls}-rail {
+    width: 2px;
+  }
+  .@{slider-prefix-cls}-track {
+    width: 2px;
+  }
+  .@{slider-prefix-cls}-step {
+    width: 2px;
+  }
+  .@{slider-prefix-cls}-handle {
+    margin-left: -4px;
+  }
+}

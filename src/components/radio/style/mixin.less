@@ -1,0 +1,40 @@
+@import '../../style/mixins/index.less';
+
+.button-bg-text(@bgColor, @textColor) {
+  color: @textColor;
+  background: @bgColor;
+}
+
+.radio-status-color(@innerColor, @outColor) {
+  [fill='transparent'] {
+    fill: @innerColor;
+  }
+
+  [fill='currentColor'] {
+    fill: @outColor;
+  }
+}
+
+.radio-color(@prefixCls, @checkedInnerColor, @checkedOutColor, @uncheckInnerColor, @uncheckOutColor) {
+  & .@{prefixCls} {
+    &-icon-checked {
+      .radio-status-color(@checkedInnerColor, @checkedOutColor);
+    }
+
+    &-icon-uncheck {
+      .radio-status-color(@uncheckInnerColor, @uncheckOutColor);
+    }
+  }
+}
+
+.radio-hover(@prefixCls, @checkedInnerColor, @checkedOutColor, @uncheckInnerColor, @uncheckOutColor) {
+  &:hover:not(.@{prefixCls}-disabled) {
+    .radio-color(
+      @prefixCls,
+      @checkedInnerColor,
+      @checkedOutColor,
+      @uncheckInnerColor,
+      @uncheckOutColor
+    );
+  }
+}

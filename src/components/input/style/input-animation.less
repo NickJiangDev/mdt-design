@@ -1,0 +1,43 @@
+@import './mixin';
+@prefixCls: dmc-input-animation;
+@transition: width 0.2s ease-in-out;
+
+.@{prefixCls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  &-input {
+    width: 0%;
+    margin-right: -4px;
+    transition: @transition;
+
+    .dmc-input-prefix-icon {
+      visibility: hidden;
+    }
+  }
+
+  &-icon {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    width: 16px;
+    height: 100%;
+    transition: @transition;
+  }
+
+  &-open {
+    .@{prefixCls}-input {
+      width: 100%;
+      margin-right: 0;
+    }
+
+    .@{prefixCls}-icon {
+      width: calc(100% - 18px);
+      pointer-events: none;
+    }
+  }
+}

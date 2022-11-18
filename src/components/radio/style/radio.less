@@ -1,0 +1,142 @@
+@import './mixin';
+
+@prefixCls: dmc-radio;
+
+.@{prefixCls} {
+  position: relative;
+  .flex-ai(center, inline-flex);
+  cursor: pointer;
+  .radio-color(
+    @prefixCls,
+    var(--dmc-radio-checked-inner-color),
+    var(--dmc-radio-checked-out-color),
+    var(--dmc-radio-unchecked-inner-color),
+    var(--dmc-radio-unchecked-out-color)
+  );
+  .radio-hover(
+    @prefixCls,
+    var(--dmc-radio-hover-checked-inner-color),
+    var(--dmc-radio-hover-checked-out-color),
+    var(--dmc-radio-hover-unchecked-inner-color),
+    var(--dmc-radio-hover-unchecked-out-color)
+  );
+
+  &-page-bg {
+    .radio-color(
+      @prefixCls,
+      var(--dmc-radio-pb-checked-inner-color),
+      var(--dmc-radio-pb-checked-out-color),
+      var(--dmc-radio-pb-unchecked-inner-color),
+      var(--dmc-radio-pb-unchecked-out-color)
+    );
+    .radio-hover(
+      @prefixCls,
+      var(--dmc-radio-pb-hover-checked-inner-color),
+      var(--dmc-radio-pb-hover-checked-out-color),
+      var(--dmc-radio-pb-hover-unchecked-inner-color),
+      var(--dmc-radio-pb-hover-unchecked-out-color)
+    );
+  }
+
+  &-menu-bg {
+    .radio-color(
+      @prefixCls,
+      var(--dmc-radio-mb-checked-inner-color),
+      var(--dmc-radio-mb-checked-out-color),
+      var(--dmc-radio-mb-unchecked-inner-color),
+      var(--dmc-radio-mb-unchecked-out-color)
+    );
+    .radio-hover(
+      @prefixCls,
+      var(--dmc-radio-mb-hover-checked-inner-color),
+      var(--dmc-radio-mb-hover-checked-out-color),
+      var(--dmc-radio-mb-hover-unchecked-inner-color),
+      var(--dmc-radio-mb-hover-unchecked-out-color)
+    );
+  }
+
+  &-assist-bg {
+    .radio-color(
+      @prefixCls,
+      var(--dmc-radio-ab-checked-inner-color),
+      var(--dmc-radio-ab-checked-out-color),
+      var(--dmc-radio-ab-unchecked-inner-color),
+      var(--dmc-radio-ab-unchecked-out-color)
+    );
+    .radio-hover(
+      @prefixCls,
+      var(--dmc-radio-ab-hover-checked-inner-color),
+      var(--dmc-radio-ab-hover-checked-out-color),
+      var(--dmc-radio-ab-hover-unchecked-inner-color),
+      var(--dmc-radio-ab-hover-unchecked-out-color)
+    );
+  }
+
+  &-info {
+    margin-left: 6px;
+    color: var(--dmc-radio-info-color);
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    .radio-color(
+      @prefixCls,
+      var(--dmc-radio-disabled-checked-inner-color),
+      var(--dmc-radio-disabled-checked-out-color),
+      var(--dmc-radio-disabled-unchecked-inner-color),
+      var(--dmc-radio-disabled-unchecked-out-color)
+    );
+
+    &.@{prefixCls}-page-bg {
+      .radio-color(
+        @prefixCls,
+        var(--dmc-radio-pb-disabled-checked-inner-color),
+        var(--dmc-radio-pb-disabled-checked-out-color),
+        var(--dmc-radio-pb-disabled-unchecked-inner-color),
+        var(--dmc-radio-pb-disabled-unchecked-out-color)
+      );
+    }
+
+    &.@{prefixCls}-menu-bg {
+      .radio-color(
+        @prefixCls,
+        var(--dmc-radio-mb-disabled-checked-inner-color),
+        var(--dmc-radio-mb-disabled-checked-out-color),
+        var(--dmc-radio-mb-disabled-unchecked-inner-color),
+        var(--dmc-radio-mb-disabled-unchecked-out-color)
+      );
+    }
+
+    &.@{prefixCls}-assist-bg {
+      .radio-color(
+        @prefixCls,
+        var(--dmc-radio-ab-disabled-checked-inner-color),
+        var(--dmc-radio-ab-disabled-checked-out-color),
+        var(--dmc-radio-ab-disabled-unchecked-inner-color),
+        var(--dmc-radio-ab-disabled-unchecked-out-color)
+      );
+    }
+
+    .@{prefixCls}-info {
+      color: var(--dmc-radio-info-disabled-color);
+    }
+  }
+
+  &-compact .dmc-icon {
+    .square(18px);
+  }
+
+  &-group {
+    display: inline-flex;
+
+    .@{prefixCls} {
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

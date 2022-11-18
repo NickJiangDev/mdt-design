@@ -1,0 +1,140 @@
+@import 'mixin';
+
+@prefixCls: dmc-check-list;
+
+.@{prefixCls} {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 170px;
+  font-size: 14px;
+
+  .dmc-list {
+    background: transparent;
+  }
+
+  &-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &-plain {
+    .@{prefixCls}-list {
+      margin-top: 8px;
+      padding: 0;
+      background: unset;
+      &-description {
+        margin-bottom: 6px;
+      }
+    }
+    .@{prefixCls}-checkbox {
+      height: 30px;
+    }
+  }
+
+  &-flex-height {
+    height: 100%;
+  }
+
+  &-checkbox {
+    flex: none;
+    height: 36px;
+  }
+
+  &.dmc-create-filter {
+    padding: 0;
+  }
+
+  &-close {
+    margin-right: 10px;
+  }
+
+  &-list {
+    position: relative;
+    .flex-dir(column);
+    flex: auto;
+    box-sizing: border-box;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding: 8px 10px;
+    overflow: hidden;
+    background: var(--dmc-checklist-bg-color);
+    border: 1px solid var(--dmc-border-btn-color);
+    border-radius: 4px;
+    .dmc-tree-list {
+      .scrollbar(transparent, var(--dmc-scrollbar-color), 7px, 7px, 7px);
+    }
+    &-description {
+      color: var(--dmc-checklist-desc-color);
+      font-size: 13px;
+      line-height: 18px;
+    }
+    &-tree {
+      flex: 1 0 auto;
+    }
+  }
+
+  &-list-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    &-gap {
+      .dmc-field-item {
+        margin: 2px 0;
+      }
+    }
+  }
+
+  &-icon-search {
+    .square(16px);
+    color: var(--dmc-checklist-icon-search-color);
+  }
+
+  &-search {
+    display: inline-flex;
+    padding: 11px 10px 6px 10px;
+  }
+
+  &-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 0;
+  }
+
+  &-icon-loading {
+    .square(16px);
+    color: var(--dmc-checklist-loading-color);
+    animation: dmc-spin 1s infinite linear;
+  }
+
+  &-empty,
+  &-no-content {
+    .flex-ai-jc(center, center);
+    height: 100%;
+    color: var(--dmc-checklist-loading-color);
+    text-align: center;
+  }
+
+  &-virtual-list {
+    flex: 1;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+  }
+
+  &-assist-bg {
+    .@{prefixCls}-list {
+      background: var(--dmc-checklist-ab-bg-color);
+      .dmc-tree-list {
+        .scrollbar(transparent, var(--dmc-scrollbar-ab-color), 7px, 7px, 7px);
+      }
+    }
+  }
+  &-plain-row-wrap {
+    cursor: pointer;
+  }
+}

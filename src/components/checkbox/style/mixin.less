@@ -1,0 +1,46 @@
+@import '../../style/mixins/index.less';
+
+.checkbox-uncheck-color(@uncheckInnerColor, @uncheckOutColor) {
+  path[fill='transparent'] {
+    fill: @uncheckInnerColor;
+  }
+  path[fill='currentColor'] {
+    fill: @uncheckOutColor;
+  }
+}
+
+.title(@color, @fs, @lh) {
+  color: @color;
+  font-size: @fs;
+  line-height: @lh;
+}
+
+.checkbox-color(@prefixCls, @checkColor, @uncheckInnerColor, @uncheckOutColor) {
+  & .@{prefixCls} {
+    &-icon-checked,
+    &-icon-intermediate {
+      color: @checkColor;
+    }
+    &-icon-uncheck {
+      .checkbox-uncheck-color(@uncheckInnerColor, @uncheckOutColor);
+    }
+  }
+}
+
+.checkbox-hover(@prefixCls, @checkColor, @uncheckInnerColor, @uncheckOutColor) {
+  &:hover:not(.@{prefixCls}-disabled) {
+    .checkbox-color(@prefixCls, @checkColor, @uncheckInnerColor, @uncheckOutColor);
+  }
+}
+
+.checkbox-title-disabled(@prefixCls) {
+  & .@{prefixCls} {
+    &-title {
+      color: var(--dmc-checkbox-title-disabled-color);
+    }
+
+    &-sub-title {
+      color: var(--dmc-checkbox-sub-title-disabled-color);
+    }
+  }
+}

@@ -1,0 +1,126 @@
+@import './mixin';
+
+@prefixCls: dmc-preview-list;
+
+.@{prefixCls} {
+  .flex-dir(column);
+  .square(100%);
+
+  &-head {
+    height: 34px;
+    color: var(--dmc-text-200-color);
+    background-color: rgba(76, 85, 110, 0.3);
+    .flex-ai(center);
+    .name {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      font-size: 14px;
+      text-align: center;
+    }
+    &-black-full {
+      background-color: rgba(76, 85, 110, 0.2);
+    }
+  }
+
+  &-default-full {
+    background-color: black;
+  }
+  &-black-full {
+    background-color: var(--dmc-page-700-color);
+  }
+
+  &-action {
+    .flex-ai(center);
+    color: var(--dmc-text-400-color);
+    .dmc-icon {
+      margin-right: 9px;
+    }
+  }
+
+  &-fullscreen {
+    width: 100vw;
+    height: 100vh;
+    //.dmc-dialog-content {
+    //  display: none;
+    //}
+  }
+
+  &-preview {
+    position: relative;
+    flex: 1;
+    .flex-dir(column);
+
+    &-container {
+      flex: 1;
+      overflow: hidden;
+      border-radius: 6px;
+      .flex-ai-jc(center,space-between);
+      .content {
+        width: calc(100% - 188px);
+        height: 100%;
+      }
+    }
+  }
+
+  &-nav {
+    position: absolute;
+    top: calc(50% - 60px);
+    .flex-ai-jc(center, center);
+    .size(40px, 120px);
+    z-index: @zindex-max;
+    color: var(--dmc-text-200-color);
+    cursor: pointer;
+    opacity: 0.7;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 1;
+    }
+  }
+
+  &-left-nav {
+    left: 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  &-right-nav {
+    right: 0;
+    border-radius: 8px 0 0 8px;
+  }
+
+  &-item {
+    box-sizing: border-box;
+    padding: 0 4px;
+    pointer-events: none;
+
+    &-inner {
+      .square(100%);
+      box-sizing: border-box;
+      overflow: hidden;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    &-active &-inner {
+      border-color: var(--dmc-blue-500-color);
+    }
+  }
+
+  &-list {
+    margin-top: 10px;
+  }
+}
+
+.mobile .@{prefixCls} {
+  &-preview {
+    &-container {
+      .content {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

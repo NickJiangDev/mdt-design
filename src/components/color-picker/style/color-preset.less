@@ -1,0 +1,33 @@
+@import 'variable';
+@import '../../style/mixins/index';
+
+.@{prefixCls}-preset {
+  padding: 3px 10px;
+
+  &-trigger {
+    .flex-ai(center);
+    color: var(--dmc-colorpicker-content-text-color);
+    font-size: 12px;
+
+    &:hover {
+      color: var(--dmc-colorpicker-content-text-hover-color);
+    }
+  }
+
+  &-top {
+    .flex-ai-jc(center, space-between);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+
+  &-expand {
+    .square(15px);
+    color: var(--dmc-colorpicker-content-text-color);
+    transition: 0.2s ease transform;
+
+    &.expand {
+      transform: rotate(180deg);
+    }
+  }
+}

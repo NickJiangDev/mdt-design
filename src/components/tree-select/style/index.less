@@ -1,0 +1,135 @@
+@import '../../style/mixins/index.less';
+@selectTreePrefixCls: dmc-select-tree;
+@treeNodePrefixCls: ~'@{selectTreePrefixCls}-treenode';
+
+.@{selectTreePrefixCls} {
+  color: var(--dmc-tree-text-color);
+  font-size: 13px;
+  line-height: 18px;
+
+  &-checkable {
+    .@{selectTreePrefixCls}-switcher {
+      right: -22px;
+    }
+    .@{selectTreePrefixCls}-iconEle {
+      right: -3px;
+    }
+  }
+
+  &-checkbox {
+    position: relative;
+    right: -22px;
+    z-index: 10;
+    display: block;
+    .square(24px);
+    background: transparent;
+    .flex-ai(center);
+
+    &-disabled {
+      cursor: not-allowed;
+    }
+    & + .@{selectTreePrefixCls}-node-content-wrapper {
+      position: relative;
+      right: 22px;
+    }
+  }
+
+  &-switcher {
+    position: relative;
+    .square(18px);
+    display: inline-flex;
+    cursor: pointer;
+    .dmc-icon {
+      .flex-ai(center);
+      .square(100%);
+    }
+  }
+
+  &-indent-unit {
+    padding-left: 24px;
+  }
+
+  &-iconEle {
+    display: inline-flex;
+    align-items: center;
+
+    & > svg {
+      .square(20px);
+      margin-right: 5px;
+      margin-left: 10px;
+    }
+  }
+
+  &-node-content-wrapper {
+    .flex-ai(center);
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px 0 4px 4px;
+    border-radius: 4px;
+
+    .@{selectTreePrefixCls}-title {
+      margin-left: 4px;
+    }
+
+    &:hover {
+      background: var(--dmc-tree-bg-hover-color);
+    }
+  }
+
+  &-node-selected {
+    background: var(--dmc-tree-bg-selected-color);
+  }
+}
+
+.@{treeNodePrefixCls} {
+  .flex-ai(center);
+  padding: 3px 0;
+  cursor: pointer;
+
+  &-disabled {
+    cursor: not-allowed;
+    &:hover {
+      background: transparent !important;
+    }
+    .@{treeNodePrefixCls}-content-wrapper {
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+}
+
+.dmc-tree-select-dropdown {
+  .dmc-select-empty {
+    .flex-ai(center);
+    margin-top: 8px;
+    padding-left: 33px;
+    color: var(--dmc-tree-select-empty-color);
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.dmc-tree-select-full {
+  .@{selectTreePrefixCls}-content-wrapper {
+    padding: 0 4px;
+  }
+
+  .@{treeNodePrefixCls} + .@{treeNodePrefixCls} {
+    margin-top: 6px;
+  }
+
+  .@{treeNodePrefixCls} {
+    width: 100%;
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--dmc-tree-bg-hover-color);
+    }
+
+    &-selected {
+      background: var(--dmc-tree-bg-selected-color);
+    }
+  }
+}

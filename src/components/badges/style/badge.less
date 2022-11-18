@@ -1,0 +1,43 @@
+@import './mixin.less';
+
+@dmc-badge-bg-color: var(--dmc-badge-bg-color);
+@dmc-badge-processing-bg-color: var(--dmc-badge-processing-bg-color);
+@dmc-badge-success-bg-color: var(--dmc-badge-success-bg-color);
+@dmc-badge-warning-bg-color: var(--dmc-badge-warning-bg-color);
+
+.@{prefixCls} {
+  position: relative;
+  display: inline-block;
+  .status();
+  &-count {
+    display: inline-block;
+    height: 16px;
+    padding: 0 6px;
+    color: var(--dmc-badge-text-color);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  &-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+  }
+  &-count,
+  &-dot {
+    .position-tr();
+    transform: translate(50%, -50%);
+    transform-origin: 100% 0%;
+  }
+  &-processing {
+    .status(-processing);
+  }
+  &-warning {
+    .status(-warning);
+  }
+  &-success {
+    .status(-success);
+  }
+}

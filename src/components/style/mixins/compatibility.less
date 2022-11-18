@@ -1,0 +1,85 @@
+/**
+兼容性相关
+ */
+
+// 输入框占位符颜色
+.placeholder(@color) {
+  &::-moz-placeholder {
+    color: @color;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: @color;
+  }
+
+  &::-webkit-input-placeholder {
+    color: @color;
+  }
+}
+
+// 输入框占位符颜色
+.autoFill(@color) {
+  &::-internal-autofill-selected,
+  &::-internal-autofill-previewed {
+    box-shadow: inset 0 0 20px 20px #f00;
+  }
+}
+
+.scrollbar(@track-bg, @thumb-bg, @w: 6px, @h: 6px, @br: 6px) {
+  // TODO 追加其他浏览器滚动条样式
+  &::-webkit-scrollbar {
+    display: none;
+    width: @w;
+    height: @h;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      display: block;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: @track-bg;
+    border-radius: @br;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: @thumb-bg;
+    border-radius: @br;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: @track-bg;
+  }
+}
+
+.overwrite-firefox-scrollbar (@thumb-bg, @track-bg) {
+  scrollbar-width: thin;
+  scrollbar-color: @thumb-bg transparent;
+}
+
+.overwrite-scrollbar(@type: default, @track-bg: transparent) when (@type = default) {
+  @thumb-bg: var(--dmc-primary-panel-100-color);
+  .scrollbar(@track-bg, @thumb-bg, 7px, 7px, 7px);
+  .overwrite-firefox-scrollbar(@thumb-bg, @track-bg);
+}
+
+.overwrite-scrollbar(@type, @track-bg: transparent) when (@type = page-bg) {
+  @thumb-bg: var(--dmc-primary-panel-400-color);
+  .scrollbar(@track-bg, @thumb-bg, 7px, 7px, 7px);
+  .overwrite-firefox-scrollbar(@thumb-bg, @track-bg);
+}
+
+.overwrite-scrollbar(@type, @track-bg: transparent) when (@type = menu-bg) {
+  @thumb-bg: var(--dmc-primary-menu-300-color);
+  .scrollbar(@track-bg, @thumb-bg, 7px, 7px, 7px);
+  .overwrite-firefox-scrollbar(@thumb-bg, @track-bg);
+}
+
+.overwrite-scrollbar(@type, @track-bg: transparent) when (@type = assist-bg) {
+  @thumb-bg: var(--dmc-assist-panel-100-color);
+  .scrollbar(@track-bg, @thumb-bg, 7px, 7px, 7px);
+  .overwrite-firefox-scrollbar(@thumb-bg, @track-bg);
+}

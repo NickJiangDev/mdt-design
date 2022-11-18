@@ -1,0 +1,13 @@
+@import '../../style/mixins/index.less';
+
+@prefixCls: dmc-badge;
+.status(@type: '') {
+  @countBgColor: 'dmc-badge@{type}-bg-color';
+  @dotBgColor: 'dmc-badge@{type}-bg-color';
+  .@{prefixCls}-count {
+    background: @@countBgColor;
+  }
+  .@{prefixCls}-dot {
+    background: @@dotBgColor;
+  }
+}

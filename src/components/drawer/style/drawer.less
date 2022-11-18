@@ -1,0 +1,203 @@
+@import './mixin';
+
+@ease-in-out-circ: ease-in-out;
+@duration: 0.4s;
+@drawer: dmc-drawer;
+
+.@{drawer} {
+  position: fixed;
+  z-index: @zindex-drawer;
+  transition: width 0s ease @duration, height 0s ease @duration,
+    transform @duration @ease-in-out-circ;
+  > * {
+    transition: transform @duration @ease-in-out-circ, opacity @duration @ease-in-out-circ;
+  }
+
+  & &-mask {
+    .position-tl();
+    .size(100%, 0);
+    background: #000;
+    opacity: 0;
+    transition: opacity @duration @ease-in-out-circ, height 0s ease @duration;
+  }
+  &-content-wrapper {
+    position: absolute;
+    background: var(--dmc-drawer-bg-color);
+    box-shadow: var(--dmc-drawer-shadow-color);
+  }
+  &-content {
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+    color: var(--dmc-drawer-content-text-color);
+    font-size: 14px;
+  }
+  &-handle {
+    position: absolute;
+    top: 72px;
+    z-index: 0;
+    .flex-ai-jc(center, center);
+    .size(41px, 40px);
+    background: var(--dmc-page-700-color);
+    cursor: pointer;
+
+    &-icon {
+      position: relative;
+      .size(14px, 2px);
+      background: var(--dmc-page-400-color);
+      transition: background @duration @ease-in-out-circ;
+      &::before,
+      &::after {
+        position: absolute;
+        display: block;
+        .size(100%, 2px);
+        background: var(--dmc-page-400-color);
+        transition: transform @duration @ease-in-out-circ;
+        content: '';
+      }
+      &::before {
+        top: -5px;
+      }
+      &::after {
+        top: 5px;
+      }
+    }
+  }
+  &-left,
+  &-right {
+    .size(0, 100%);
+    .@{drawer}-content-wrapper,
+    .@{drawer}-content {
+      height: 100%;
+    }
+    &.@{drawer}-open {
+      width: 100%;
+      &.no-mask {
+        width: 0%;
+      }
+    }
+  }
+  &-left {
+    left: 0;
+    .@{drawer} {
+      &-handle {
+        right: -40px;
+        border-radius: 0 4px 4px 0;
+        box-shadow: var(--dmc-drawer-left-shadow-color);
+      }
+    }
+  }
+  &-right {
+    top: 0;
+    right: 0;
+    .@{drawer} {
+      &-content-wrapper {
+        right: 0;
+      }
+      &-handle {
+        left: -40px;
+        border-radius: 4px 0 0 4px;
+        box-shadow: var(--dmc-drawer-right-shadow-color);
+      }
+    }
+    &.@{drawer}-open {
+      &.no-mask {
+        right: 1px;
+        transform: translateX(1px);
+      }
+    }
+  }
+  &-top,
+  &-bottom {
+    .size(100%, 0);
+    .@{drawer}-content-wrapper,
+    .@{drawer}-content {
+      width: 100%;
+    }
+    .@{drawer}-content {
+      height: 100%;
+    }
+    &.@{drawer}-open {
+      height: 100%;
+      &.no-mask {
+        height: 0%;
+      }
+    }
+
+    .@{drawer} {
+      &-handle {
+        left: 50%;
+        margin-left: -20px;
+      }
+    }
+  }
+  &-top {
+    top: 0;
+    .@{drawer} {
+      &-handle {
+        top: auto;
+        bottom: -40px;
+        border-radius: 0 0 4px 4px;
+        box-shadow: var(--dmc-drawer-top-shadow-color);
+      }
+    }
+  }
+  &-bottom {
+    bottom: 0;
+    .@{drawer} {
+      &-content-wrapper {
+        bottom: 0;
+      }
+      &-handle {
+        top: -40px;
+        border-radius: 4px 4px 0 0;
+        box-shadow: var(--dmc-drawer-botom-shadow-color);
+      }
+    }
+    &.@{drawer}-open {
+      &.no-mask {
+        bottom: 1px;
+        transform: translateY(1px);
+      }
+    }
+  }
+  &.@{drawer}-open {
+    transition: transform @duration @ease-in-out-circ;
+    .@{drawer} {
+      &-mask {
+        height: 100%;
+        opacity: 0.8;
+        transition: opacity 0.3s @ease-in-out-circ;
+      }
+      &-handle {
+        &-icon {
+          background: transparent;
+          &::before {
+            transform: translateY(5px) rotate(45deg);
+          }
+          &::after {
+            transform: translateY(-5px) rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+  &.@{drawer}-drag .@{drawer}-content-wrapper {
+    background: transparent;
+    box-shadow: none;
+    pointer-events: none;
+
+    .dmc-split-panel,
+    .dmc-split-panel .Pane1 {
+      pointer-events: none;
+    }
+
+    .dmc-split-panel-resizer,
+    .dmc-split-panel .Pane2 {
+      background: var(--dmc-drawer-bg-color);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.24), -2px 0 6px rgba(0, 0, 0, 0.36),
+        -10px 0 20px rgba(0, 0, 0, 0.12);
+      pointer-events: auto;
+    }
+  }
+}

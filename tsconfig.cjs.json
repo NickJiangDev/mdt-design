@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./_tmp",
+    "paths": {
+      "@/*": ["_tmp/*"]
+    },
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "cjs",
+    "isolatedModules": false,
+    "noEmit": false
+  }
+}

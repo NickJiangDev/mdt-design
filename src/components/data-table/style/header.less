@@ -1,0 +1,58 @@
+@import './mixins.less';
+
+.rdg-header-row,
+.rdg-filter-row {
+  contain: strict;
+  contain: size layout style paint;
+  position: sticky;
+  z-index: 3;
+  display: flex;
+  width: var(--row-width);
+  // background-color: var(--header-background-color);
+}
+
+.rdg-header-row {
+  top: 0;
+  height: var(--header-row-height);
+  line-height: var(--header-row-height);
+
+  .rdg-cell {
+    height: 45px;
+    text-align: center;
+  }
+}
+
+.rdg-filter-row {
+  top: var(--header-row-height);
+  height: var(--filter-row-height);
+  line-height: var(--filter-row-height);
+
+  .rdg-cell {
+    padding: 0 15px;
+  }
+}
+
+// TODO: replace this with a pseudo-element once we drop support for Legacy Edge,
+// as `cursor` doesn't work on pseudo-elements on those browsers.
+.rdg-header-cell-resizer {
+  width: 10px;
+  cursor: col-resize;
+  .position(absolute, 0,0,0, '');
+}
+
+.rdg-cell .Select {
+  max-height: 30px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.rdg-header-sort-cell {
+  display: flex;
+  cursor: pointer;
+}
+
+.rdg-header-sort-name {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,87 @@
+@import './mixin';
+@prefixCls: dmc-btn-link;
+
+.@{prefixCls} {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  .flex-ai-jc(center, center, inline-flex);
+
+  .link-color(
+    @prefixCls,
+    var(--dmc-link-text-color),
+    var(--dmc-link-text-hover-color),
+    var(--dmc-link-text-active-color),
+  );
+
+  &-danger {
+    .link-color(
+      @prefixCls,
+      var(--dmc-link-danger-text-color),
+      var(--dmc-link-danger-text-hover-color),
+      var(--dmc-link-danger-text-active-color),
+    );
+  }
+
+  &-plain {
+    .link-color(
+      @prefixCls,
+      var(--dmc-link-plain-text-color),
+      var(--dmc-link-plain-text-hover-color),
+      var(--dmc-link-plain-text-active-color),
+    );
+  }
+
+  &-disabled {
+    color: var(--dmc-link-text-disabled-color);
+    cursor: not-allowed;
+  }
+  &-disabled&-danger {
+    cursor: not-allowed;
+    color: var(--dmc-link-danger-text-disabled-color);
+  }
+  &-disabled&-plain {
+    cursor: not-allowed;
+    color: var(--dmc-link-plain-text-disabled-color);
+  }
+
+  &-left-icon {
+    .flex-ai-jc(center, center, inline-flex);
+    .button-icon-size(right, 12px);
+  }
+  &-right-icon {
+    .flex-ai-jc(center, center, inline-flex);
+    .button-icon-size(left, 12px);
+  }
+
+  &-compact &-left-icon {
+    .button-icon-size(right, 10px);
+  }
+  &-compact &-right-icon {
+    .button-icon-size(left, 10px);
+  }
+
+  &-compact {
+    font-size: 12px;
+    line-height: 17px;
+  }
+}
+
+.link-color(
+  @cls,
+  @color,
+  @hoverColor,
+  @activeColor,
+) {
+  color: @color;
+  &:hover:not(.@{cls}-disabled) {
+    color: @hoverColor;
+  }
+
+  &:active:not(.@{cls}-disabled) {
+    color: @activeColor;
+  }
+}

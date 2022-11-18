@@ -1,0 +1,176 @@
+@import './mixin';
+
+@popover-prefix-cls: dmc-popover;
+@popover-arrow-width: 7px;
+@popover-distance: @popover-arrow-width + 4px;
+@popover-bg: var(--dmc-popover-bg);
+@box-shadow-base: var(--dmc-popover-box-shadow-base);
+
+.@{popover-prefix-cls} {
+  .position-tl();
+  z-index: @zindex-popover;
+  box-sizing: border-box;
+  font-weight: normal;
+  white-space: normal;
+  text-align: left;
+  cursor: auto;
+  user-select: text;
+
+  &::after {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.01);
+    content: '';
+  }
+
+  &-hidden {
+    display: none;
+  }
+
+  // Offset the popover to account for the popover arrow
+  &-placement-top,
+  &-placement-topLeft,
+  &-placement-topRight {
+    padding-bottom: @popover-distance;
+  }
+
+  &-placement-right,
+  &-placement-rightTop,
+  &-placement-rightBottom {
+    padding-left: @popover-distance;
+  }
+
+  &-placement-bottom,
+  &-placement-bottomLeft,
+  &-placement-bottomRight {
+    padding-top: @popover-distance;
+  }
+
+  &-placement-left,
+  &-placement-leftTop,
+  &-placement-leftBottom {
+    padding-right: @popover-distance;
+  }
+
+  &-inner {
+    overflow: hidden;
+    background-color: @popover-bg;
+    background-clip: padding-box;
+    border: 1px solid var(--dmc-popover-border-color);
+    border-radius: 4px;
+    box-shadow: @box-shadow-base;
+  }
+
+  &-title {
+    min-width: 177px;
+    margin: 0;
+    padding: 10px 18px;
+    color: var(--dmc-popover-title-color);
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    border-bottom: 1px solid var(--dmc-popover-title-border-bottom-color);
+  }
+
+  &-inner-content {
+    padding: 20px;
+    color: #000;
+  }
+
+  &-arrow {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: sqrt(@popover-arrow-width * @popover-arrow-width * 2);
+    height: sqrt(@popover-arrow-width * @popover-arrow-width * 2);
+    background: @popover-bg;
+    border: 0.5px solid var(--dmc-popover-border-color);
+    transform: rotate(45deg);
+
+    &::after {
+      position: absolute;
+      .square(calc(100% + 2px));
+      background: @popover-bg;
+      content: '';
+    }
+  }
+
+  &-placement-top > &-content > &-arrow,
+  &-placement-topLeft > &-content > &-arrow,
+  &-placement-topRight > &-content > &-arrow {
+    bottom: @popover-distance - @popover-arrow-width + 2.2px;
+    &::after {
+      top: -2px;
+      left: -2px;
+    }
+  }
+  &-placement-top > &-content > &-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  &-placement-topLeft > &-content > &-arrow {
+    left: 16px;
+  }
+  &-placement-topRight > &-content > &-arrow {
+    right: 16px;
+  }
+
+  &-placement-right > &-content > &-arrow,
+  &-placement-rightTop > &-content > &-arrow,
+  &-placement-rightBottom > &-content > &-arrow {
+    left: @popover-distance - @popover-arrow-width + 2px;
+    &::after {
+      top: -2px;
+      left: 0;
+    }
+  }
+  &-placement-right > &-content > &-arrow {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &-placement-rightTop > &-content > &-arrow {
+    top: 12px;
+  }
+  &-placement-rightBottom > &-content > &-arrow {
+    bottom: 12px;
+  }
+
+  &-placement-bottom > &-content > &-arrow,
+  &-placement-bottomLeft > &-content > &-arrow,
+  &-placement-bottomRight > &-content > &-arrow {
+    top: @popover-distance - @popover-arrow-width + 2px;
+    &::after {
+      top: 0;
+      left: 0;
+    }
+  }
+  &-placement-bottom > &-content > &-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  &-placement-bottomLeft > &-content > &-arrow {
+    left: 16px;
+  }
+  &-placement-bottomRight > &-content > &-arrow {
+    right: 16px;
+  }
+
+  &-placement-left > &-content > &-arrow,
+  &-placement-leftTop > &-content > &-arrow,
+  &-placement-leftBottom > &-content > &-arrow {
+    right: @popover-distance - @popover-arrow-width + 2px;
+    &::after {
+      top: 0;
+      left: -2px;
+    }
+  }
+  &-placement-left > &-content > &-arrow {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &-placement-leftTop > &-content > &-arrow {
+    top: 12px;
+  }
+  &-placement-leftBottom > &-content > &-arrow {
+    bottom: 12px;
+  }
+}

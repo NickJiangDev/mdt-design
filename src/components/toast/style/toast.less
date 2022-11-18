@@ -1,0 +1,41 @@
+@import './mixin';
+
+@notificationPrefixCls: dmc-toast;
+
+.@{notificationPrefixCls} {
+  position: fixed;
+  z-index: @zindex-max;
+  transform: translateX(-50%);
+
+  &-notice {
+    position: relative;
+    right: auto !important;
+    display: block;
+    margin-bottom: 10px;
+
+    // &-closable {
+    //   display: none;
+    // }
+  }
+
+  &-fade-enter {
+    opacity: 0;
+    .fade-effect();
+    animation-play-state: paused;
+  }
+
+  &-fade-leave {
+    .fade-effect();
+    animation-play-state: paused;
+  }
+
+  &-fade-enter&-fade-enter-active {
+    animation-name: dmc-fade-in;
+    animation-play-state: running;
+  }
+
+  &-fade-leave&-fade-leave-active {
+    animation-name: dmc-fade-out;
+    animation-play-state: running;
+  }
+}

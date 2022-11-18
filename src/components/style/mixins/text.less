@@ -1,0 +1,18 @@
+/**
+文本相关
+ */
+
+// 文本溢出省略显示
+.text-ellipsis (@n: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  & when ( @n >= 2 ) {
+    display: -webkit-box;
+    -webkit-line-clamp: @n;
+    -webkit-box-orient: vertical;
+  }
+  & when ( @n = 1 ) {
+    white-space: nowrap;
+  }
+}

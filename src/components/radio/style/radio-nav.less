@@ -1,0 +1,42 @@
+@import './mixin';
+
+@prefixCls: dmc-radio-nav;
+
+.@{prefixCls} {
+  position: relative;
+  .flex-ai-jc(center, center, inline-flex);
+  box-sizing: border-box;
+  color: var(--dmc-radio-nav-text-color);
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: var(--dmc-radio-nav-text-hover-color);
+  }
+
+  &:active,
+  &-active {
+    color: var(--dmc-radio-nav-text-active-color) !important;
+    font-weight: 500;
+  }
+
+  &-icon {
+    .square(12px);
+  }
+
+  &-group {
+    padding: 12px 14px;
+
+    .@{prefixCls} {
+      margin-right: 13px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
